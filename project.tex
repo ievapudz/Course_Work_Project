@@ -63,10 +63,13 @@
 
 	\newpage
 	
-	\Large
 	\section{Introduction}
 
-    \vspace*{1cm}
+	This work is a prolongation of the previous work - the model 
+	that performed binary classification into thermostability 
+	classes. The model took ESM-1b protein embeddings as input 
+	and provided prediction for each protein, how likely it 
+	belongs to the thermostable class.
         
 	\normalsize
 
@@ -82,11 +85,94 @@
 
 	\section{Theory}
 
+	\subsection{ESM-1b embeddings}
+
+	\subsection{ProtTrans embeddings}
+
 	\newpage
 
 	\section{Methods}
 
 	\subsection{Objective of this work}
+
+	The main objective of this work is to analyse 
+	which numerical representation of proteins is the most 
+	suitable to use as input for the neural network 
+	model to make binary protein classification into thermostability
+	classes. Additionally, it was decided to try model 
+	architectures with one or two hidden layers and evaluate 
+	whether the different architecture improves the 
+	performance.
+
+	\subsection{Data set}
+	
+	\subsection{Correlation analysis of embeddings' components}
+
+	\subsection{Analysed representations}
+	
+	Both protein language models - ESM-1b and ProtTrans - provide 
+	per token or per residue representations - each 
+	amino acid of the protein gets 1280 or 1024-dimensional vector from
+	ESM-1b or ProtTrans model respectively. Therefore, each protein is 
+	originally represented by ${m \times n}$ matrix, 
+	where ${m}$ is the number of dimensions of the chosen type of embedding
+	and ${n}$ is the number of amino acids that compose the protein. 
+	These representations were processed to get vectors of the same dimension 
+	for each protein in the data set. The representations 
+	that were included in the analysis:
+
+	\begin{enumerate}
+		\item Mean ESM-1b and ProtTrans 
+		\item Joined mean ESM-1b and ProtTrans
+		\item Normalised mean ESM-1b and ProtTrans
+		\item Joined normalised mean ESM-1b and ProtTrans
+		\item Median ESM-1b and ProtTrans
+		\item Minimum, median, and maximum ESM-1b and ProtTrans
+		\item Quantiles (including minimum and maximum) ESM-1b and ProtTrans
+		\item Quantiles (including minimum and maximum) and mean ESM-1b and ProtTrans
+		\item Octiles (including minimum and maximum) ESM-1b and ProtTrans
+	\end{enumerate}
+
+	\begin{table}[h!]
+		\caption{Sizes of the analysed representations' vectors}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 
+			Representation & ESM-1b & ProtTrans \\
+			\hline 
+			Mean & 1280 & 1024 \\
+			Joined mean & \multicolumn{2}{c|}{2304} \\
+			Median & 1280 & 1024 \\
+			Minimum, median, maximum & 3840 & 3072 \\
+			Quantiles & 6400 & 5120 \\
+			Quantiles and mean & 7680 & 6144 \\
+			Octiles & 11520 & 9216 \\
+			\hline    
+		\end{tabular}
+		\label{table:vectorsDimensions}
+	\end{table}
+
+	\subsection{Analysed architectures}
+
+	\begin{table}[h!]
+		\caption{Sizes of the analysed representations' vectors}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 
+			Model & Number of hidden layers & Size of hidden layers \\
+			\hline 
+			SLP & 0 & - \\
+			C2H1\_h128 & 1 & 128 \\
+			C2H1\_h256 & 1 & 256 \\
+			C2H1\_h512 & 1 & 512 \\
+			C2H2\_h256-128 & 2 & 256, 128 \\
+			C2H2\_h512-256 & 2 & 512, 256 \\
+			\hline    
+		\end{tabular}
+		\label{table:modelArchitectures}
+	\end{table}
 
 	\pagebreak
 
