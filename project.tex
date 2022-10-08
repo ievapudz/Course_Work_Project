@@ -332,6 +332,31 @@
 
 	\subsection{Representation analysis}
 
+	By comparing SLP model's trained with ESM-1b embeddings results
+	with results of SLP trained with ProtTrans, it was observed that 
+	the latter model performs better.
+
+	\begin{table}[h!]
+		\caption{Comparison of scores between models trained with ESM-1b
+		and ProtTrans mean representations}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 
+						
+			& ESM-1b & ProtTrans \\
+			\hline 
+			MCC & 0.843 & 0.901 \\
+			Accuracy & 0.921 & 0.951 \\
+			Loss & 0.208 & 0.128 \\
+			Precision & 0.921 & 0.949 \\
+			Recall & 0.917 & 0.949 \\
+			ROC AUC & 0.979 & 0.990 \\
+			\hline    
+		\end{tabular}
+		\label{table:comparisonESMandPT}
+	\end{table}
+
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.7]{SLP_ESM_003_diff_representations.png}
