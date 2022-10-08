@@ -334,7 +334,7 @@
 
 	By comparing SLP model's trained with ESM-1b embeddings results
 	with results of SLP trained with ProtTrans, it was observed that 
-	the latter model performs better.
+	the latter model performs better (Table \ref{table:comparisonESMandPT}).
 
 	\begin{table}[h!]
 		\caption{Comparison of scores between models trained with ESM-1b
@@ -356,6 +356,32 @@
 		\end{tabular}
 		\label{table:comparisonESMandPT}
 	\end{table}
+
+	After joining ESM-1b and ProtTrans mean embeddings, an SLP was trained 
+	using these joined representations. The results of this model were not 
+	better than model's trained using only ProtTrans embeddings scores. 
+
+	\begin{table}[h!]
+		\caption{Comparison of scores between models trained with ESM-1b
+		and ProtTrans mean representations}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 
+						
+			& Joined & Normalised joined \\
+			\hline 
+			MCC & 0.899 & 0.920 \\
+			Accuracy & 0.949 & 0.960 \\
+			Loss & 0.131 & 0.139 \\
+			Precision & 0.945 & 0.954 \\
+			Recall & 0.951 & 0.964 \\
+			ROC AUC & 0.991 & 0.992 \\
+			\hline    
+		\end{tabular}
+		\label{table:comparisonJoinedAndJoinedNorm}
+	\end{table}
+
 
 	\begin{figure}[h!]
 		\centering
