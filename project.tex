@@ -145,8 +145,12 @@
 		\end{tabular}
 		\label{table:numberEmbeddingsClasses}
 	\end{table}
+
+	\newpage
 	
 	\subsection{Correlation analysis of embeddings' components}
+
+	\newpage
 
 	\subsection{Analysed representations}
 	
@@ -193,6 +197,8 @@
 		\label{table:vectorsDimensions}
 	\end{table}
 
+	\newpage
+
 	\subsection{Analysed architectures}
 
 	\begin{table}[h!]
@@ -208,20 +214,11 @@
 			C2H1\_h640 & 1 & 640 \\
 			C2H1\_h320 & 1 & 320 \\
 			C2H1\_h160 & 1 & 160 \\
-			SLP\_ESM\-1b & 0 & - \\
+			SLP\_ESM-1b & 0 & - \\
 			\hline    
 		\end{tabular}
 		\label{table:modelArchitecturesESM}
 	\end{table}
-
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.6]{MLP_ESM.png}
-
-		\caption{Comparison of models', which were trained using 
-		ESM-1b embeddings, MCC and ROC AUC scores}
-		\label{figure:scoresMLP_ESM}
-	\end{figure}
 
 	\begin{table}[h!]
 		\caption{Models that were tested with ProtTrans embeddings input}
@@ -242,6 +239,43 @@
 		\label{table:modelArchitecturesPT}
 	\end{table}
 
+	\newpage
+
+	\section{Results}
+
+	\subsection{Representation analysis}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.7]{SLP_ESM_003_diff_representations.png}
+
+		\caption{Comparison of SLP models', which were trained with different
+		ESM-1b representations, MCC and ROC AUC scores}
+		\label{figure:scoresRepresentationsESM}
+	\end{figure}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.7]{SLP_PT_003_diff_representations.png}
+
+		\caption{Comparison of SLP models', which were trained with different
+		ProtTrans representations, MCC and ROC AUC scores}
+		\label{figure:scoresRepresentationsPT}
+	\end{figure}
+
+	\newpage
+
+	\subsection{Architecture analysis}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.6]{MLP_ESM.png}
+
+		\caption{Comparison of models', which were trained using 
+		ESM-1b embeddings, MCC and ROC AUC scores}
+		\label{figure:scoresMLP_ESM}
+	\end{figure}
+
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.6]{MLP_PT.png}
@@ -251,14 +285,11 @@
 		\label{figure:scoresMLP_PT}
 	\end{figure}
 
-	\pagebreak
-
-	\section{Results}
-
-	\pagebreak
+	\newpage
 
 	\section{Conclusions}
 
+	\newpage
 
 	\section{Availability}
 
