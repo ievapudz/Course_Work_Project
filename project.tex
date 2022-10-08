@@ -10,7 +10,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[lithuanian,english]{babel}
 
-\graphicspath{}
+\graphicspath{ {./figures/} }
 
 \setstretch{1.5}
 
@@ -196,23 +196,60 @@
 	\subsection{Analysed architectures}
 
 	\begin{table}[h!]
-		\caption{Sizes of the analysed representations' vectors}
+		\caption{Models that were tested with ESM-1b embeddings input}
 		\vspace{0.2cm}
 		\centering
 		\begin{tabular}{ | c | c c | }
 			\hline 
 			Model & Number of hidden layers & Size of hidden layers \\
 			\hline 
-			SLP & 0 & - \\
-			C2H1\_h128 & 1 & 128 \\
-			C2H1\_h256 & 1 & 256 \\
-			C2H1\_h512 & 1 & 512 \\
-			C2H2\_h256-128 & 2 & 256, 128 \\
-			C2H2\_h512-256 & 2 & 512, 256 \\
+			C2H2\_h640-320 & 2 & 640, 320 \\
+			C2H2\_h320-160 & 2 & 320, 160 \\
+			C2H1\_h640 & 1 & 640 \\
+			C2H1\_h320 & 1 & 320 \\
+			C2H1\_h160 & 1 & 160 \\
+			SLP\_ESM\-1b & 0 & - \\
 			\hline    
 		\end{tabular}
-		\label{table:modelArchitectures}
+		\label{table:modelArchitecturesESM}
 	\end{table}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.6]{MLP_ESM.png}
+
+		\caption{Comparison of models', which were trained using 
+		ESM-1b embeddings, MCC and ROC AUC scores}
+		\label{figure:scoresMLP_ESM}
+	\end{figure}
+
+	\begin{table}[h!]
+		\caption{Models that were tested with ProtTrans embeddings input}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 
+			Model & Number of hidden layers & Size of hidden layers \\
+			\hline 
+			C2H2\_h512-256 & 2 & 512, 256 \\
+			C2H2\_h256-128 & 2 & 256, 128 \\
+			C2H1\_h512 & 1 & 512 \\
+			C2H1\_h256 & 1 & 256 \\
+			C2H1\_h128 & 1 & 128 \\
+			SLP\_ProtTrans & 0 & - \\
+			\hline    
+		\end{tabular}
+		\label{table:modelArchitecturesPT}
+	\end{table}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.6]{MLP_PT.png}
+
+		\caption{Comparison of models', which were trained using 
+		ProtTrans embeddings, MCC and ROC AUC scores}
+		\label{figure:scoresMLP_PT}
+	\end{figure}
 
 	\pagebreak
 
