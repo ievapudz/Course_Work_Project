@@ -242,6 +242,7 @@
 	\newpage
 
 	\subsection{Analysed representations}
+	\label{analysedRepresentations}
 
 	Firstly, principal components of ESM-1b and ProtTrans
 	mean embeddings were retrieved and taken as input for the 
@@ -427,11 +428,48 @@
 		\label{table:comparisonESMandPT}
 	\end{table}
 
+	Before joining the embeddings, the normalisation of ESM-1b and ProtTrans 
+	vectors was done. Normalised representations were taken as input to 
+	the model with the same SLP architecture. For both types of embeddings 
+	the results were improved (Tables \ref{table:comparisonESMandPT} and
+	\ref{table:normalisedESMAndPTScores}).
+
+	\begin{table}[h!]
+		\caption{The comparison of SLPs', which were 
+		trained with normalised ESM-1b and ProtTrans mean 
+		representations, testing stage scores}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 	
+			& ESM-1b & ProtTrans \\
+			\hline 
+			MCC & 0.858 & 0.915 \\
+			Accuracy & 0.929 & 0.957 \\
+			Loss & 0.248 & 0.143 \\
+			Precision & 0.923 & 0.951 \\
+			Recall & 0.931 & 0.962 \\
+			ROC AUC & 0.982 & 0.991 \\
+			\hline    
+		\end{tabular}
+		\label{table:normalisedESMAndPTScores}
+	\end{table}
+
 	After joining ESM-1b and ProtTrans mean embeddings, an SLP was trained 
-	using these joined representations. The results of this model were not 
-	better than model's trained using only ProtTrans embeddings scores
-	(Table \ref{table:comparisonESMandPT} and 
+	using these joined representations. The results of this model were similar 
+	to the model's trained using only ProtTrans embeddings, yet the results 
+	were not improved (Tables \ref{table:comparisonESMandPT} and 
 	\ref{table:comparisonJoinedAndJoinedNorm}). 
+
+	However, joining the normalised ESM-1b and ProtTrans mean representations 
+	showed the best results. Since joined representations require
+	generation of ESM-1b embeddings, this type of representation does not 
+	solve the length limitation problem. Nevertheless 
+	slightly improved results can be observed when normalised representations 
+	are used, the process of normalisation depends on the data set, which is 
+	not convenient in the process of development until the final data set 
+	is established. Therefore, the optimal choice for this stage of 
+	development was ProtTrans embeddings.
 
 	\begin{table}[h!]
 		\caption{The comparison of testing stage scores between 
@@ -455,27 +493,16 @@
 		\label{table:comparisonJoinedAndJoinedNorm}
 	\end{table}
 
-	\begin{table}[h!]
-		\caption{The comparison of SLPs', which were 
-		trained with normalised ESM-1b and ProtTrans mean 
-		representations, testing stage scores}
-		\vspace{0.2cm}
-		\centering
-		\begin{tabular}{ | c | c c | }
-			\hline 	
-			& ESM-1b & ProtTrans \\
-			\hline 
-			MCC & 0.858 & 0.915 \\
-			Accuracy & 0.929 & 0.957 \\
-			Loss & 0.248 & 0.143 \\
-			Precision & 0.923 & 0.951 \\
-			Recall & 0.931 & 0.962 \\
-			ROC AUC & 0.982 & 0.991 \\
-			\hline    
-		\end{tabular}
-		\label{table:normalisedESMAndPTScores}
-	\end{table}
-
+	Nonetheless, ProtTrans already demonstrated the impact for the 
+	model's improvement of performance, it was decided to finish up 
+	the different representation and architecture analysis using both 
+	types of embeddings. Although, the results of the consequent analysis 
+	did not change the conclusion regarding ProtTrans influence for the 
+	results for any variation of analysed representations (listed in the
+	section \ref{analysedRepresentations}) - in all cases model that used 
+	ProtTrans embeddings performed significantly better (Figures 
+	\ref{figure:scoresRepresentationsESM} and 
+	\ref{figure:scoresRepresentationsPT}).
 
 	\begin{figure}[h!]
 		\centering
@@ -520,6 +547,12 @@
 	\newpage
 
 	\section{Conclusions}
+
+	The results provided following conclusions:
+
+	\begin{enumerate}
+		\item 
+	\end{enumerate}
 
 	\newpage
 
