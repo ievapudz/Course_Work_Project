@@ -358,6 +358,50 @@
 
 	\subsection{Representation analysis}
 
+	\begin{table}[h!]
+		\caption{The comparison of scores between models trained with ESM-1b
+		and ProtTrans mean representations' principal components 
+		that account for 95\% of the data set variance}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 
+						
+			& ESM-1b & ProtTrans \\
+			\hline 
+			MCC & 0.699 & 0.767 \\
+			Accuracy & 0.845 & 0.880 \\
+			Loss & 0.383 & 0.442 \\
+			Precision & 0.910 & 0.940 \\
+			Recall & 0.768 & 0.813 \\
+			ROC AUC & 0.901 & 0.945 \\
+			\hline    
+		\end{tabular}
+		\label{table:comparisonESMandPTPC95}
+	\end{table}
+
+	\begin{table}[h!]
+		\caption{The comparison of scores between models trained with ESM-1b
+		and ProtTrans mean representations' principal components 
+		that account for 100\% of the data set variance}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 
+						
+			& ESM-1b & ProtTrans \\
+			\hline 
+			MCC & 0.698 & 0.766 \\
+			Accuracy & 0.845 & 0.879 \\
+			Loss & 0.382 & 0.443 \\
+			Precision & 0.909 & 0.939 \\
+			Recall & 0.767 & 0.812 \\
+			ROC AUC & 0.901 & 0.943 \\
+			\hline    
+		\end{tabular}
+		\label{table:comparisonESMandPTPC100}
+	\end{table}
+
 	By comparing SLP model's trained with ESM-1b embeddings results
 	with results of SLP trained with ProtTrans, it was observed that 
 	the latter model performs better (Table \ref{table:comparisonESMandPT}).
@@ -390,7 +434,7 @@
 	\ref{table:comparisonJoinedAndJoinedNorm}). 
 
 	\begin{table}[h!]
-		\caption{The omparison of testing stage scores between 
+		\caption{The comparison of testing stage scores between 
 		models trained with ESM-1b and ProtTrans mean 
 		representations}
 		\vspace{0.2cm}
