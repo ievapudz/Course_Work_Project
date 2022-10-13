@@ -106,11 +106,13 @@
 
 	\subsection{Data set}
 
-	The data set that was used for the research of this work was 
+	The data set, which was used for the research of principal components' 
+	usage as input this work, was 
 	used the same as for the training, validation, and testing of 
 	the single-layer perceptron (SLP) with mean ESM-1b 
-	representations in the previous work, although for this 
-	research the data set was filtered out of identical sequences to 
+	representations in the previous work. Although, for the 
+	research of other representations, the data set was 
+	filtered out of identical sequences to 
 	get more accurate evaluations.
 
 	\begin{table}[h!]
@@ -240,8 +242,32 @@
 	\newpage
 
 	\subsection{Analysed representations}
+
+	Firstly, principal components of ESM-1b and ProtTrans
+	mean embeddings were retrieved and taken as input for the 
+	model. In particular, principal components that explained 
+	95 percent and 100 percent of the data variance were taken.
+	The data set for these representations analysis was picked 
+	the same as for the SLP analysis in the previous work.
+
+	\begin{table}[h!]
+		\caption{Sizes of the analysed principal components 
+		vectors}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 
+			 & ESM-1b & ProtTrans \\
+			\hline 
+			95\% & 540 & 453 \\
+			100\% & 1280 & 1024 \\
+			\hline    
+		\end{tabular}
+		\label{table:vectorsPCADimensions}
+	\end{table}
 	
-	Both protein language models - ESM-1b and ProtTrans - provide 
+	Furthermore, both protein language models - ESM-1b and 
+	ProtTrans - provide 
 	per token or per residue representations - each 
 	amino acid of the protein gets 1280 or 1024-dimensional vector from
 	ESM-1b or ProtTrans model respectively. Therefore, each protein is 
@@ -364,8 +390,9 @@
 	\ref{table:comparisonJoinedAndJoinedNorm}). 
 
 	\begin{table}[h!]
-		\caption{Comparison of scores between models trained with ESM-1b
-		and ProtTrans mean representations}
+		\caption{The omparison of testing stage scores between 
+		models trained with ESM-1b and ProtTrans mean 
+		representations}
 		\vspace{0.2cm}
 		\centering
 		\begin{tabular}{ | c | c c | }
@@ -382,6 +409,27 @@
 			\hline    
 		\end{tabular}
 		\label{table:comparisonJoinedAndJoinedNorm}
+	\end{table}
+
+	\begin{table}[h!]
+		\caption{The comparison of SLPs', which were 
+		trained with normalised ESM-1b and ProtTrans mean 
+		representations, testing stage scores}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 	
+			& ESM-1b & ProtTrans \\
+			\hline 
+			MCC & 0.858 & 0.915 \\
+			Accuracy & 0.929 & 0.957 \\
+			Loss & 0.248 & 0.143 \\
+			Precision & 0.923 & 0.951 \\
+			Recall & 0.931 & 0.962 \\
+			ROC AUC & 0.982 & 0.991 \\
+			\hline    
+		\end{tabular}
+		\label{table:normalisedESMAndPTScores}
 	\end{table}
 
 
