@@ -359,6 +359,45 @@
 
 	\subsection{Representation analysis}
 
+	Out of the scope of this representation and model architecture analysis
+	for binary classification, there were several attempts made to overtrain
+	the classification model to predict three thermostability classes (one 
+	more class added after dividing the zero-labelled class at the temperature
+	threshold of 40 degrees Celsius). The purpose of overtraining was to check 
+	whether the selected architecture has potential to be trained for the 
+	multiclass classification problem optimally. The usage of principal 
+	components of protein embeddings showed that overfitting can be done successfully, 
+	thus this input was used further. 
+
+	However, it was decided to check whether 
+	a vector of principal components could be a suitable input for the binary 
+	classification task. The testing stage metrics showed worse model's performance 
+	than using the original representations (Tables \ref{table:comparisonESMandPTdup}, 
+	\ref{table:comparisonESMandPTPC95} and 
+	\ref{table:comparisonESMandPTPC100}). 
+
+	\begin{table}[h!]
+		\caption{The comparison of scores between models trained with ESM-1b
+		and ProtTrans mean representations of an unfiltered from 
+		duplicates data set}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c | }
+			\hline 
+						
+			& ESM-1b & ProtTrans \\
+			\hline 
+			MCC & 0.843 & 0.902 \\
+			Accuracy & 0.922 & 0.951 \\
+			Loss & 0.208 & 0.128 \\
+			Precision & 0.919 & 0.949 \\
+			Recall & 0.921 & 0.951 \\
+			ROC AUC & 0.979 & 0.990 \\
+			\hline    
+		\end{tabular}
+		\label{table:comparisonESMandPTdup}
+	\end{table}
+
 	\begin{table}[h!]
 		\caption{The comparison of scores between models trained with ESM-1b
 		and ProtTrans mean representations' principal components 
@@ -408,7 +447,7 @@
 	the latter model performs better (Table \ref{table:comparisonESMandPT}).
 
 	\begin{table}[h!]
-		\caption{Comparison of scores between models trained with ESM-1b
+		\caption{The comparison of scores between models trained with ESM-1b
 		and ProtTrans mean representations}
 		\vspace{0.2cm}
 		\centering
