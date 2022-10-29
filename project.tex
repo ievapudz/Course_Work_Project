@@ -152,6 +152,18 @@
 	
 	\subsection{Correlation analysis of embeddings' components}
 
+	One of the tasks of this work was to try joined ESM-1b and ProtTrans 
+	representations and pass them as input to the thermostability 
+	classification model. It was decided to analyse the correlation 
+	coefficients between the components of these representations. 
+
+	The results of the analysis showed that there are five ESM-1b
+	embeddings' components that have absolute correlation coefficients 
+	with more than 10 ProtTrans embeddings' components higher than 0.5 
+	(Fig. \ref{figure:highCorrelationComponents}). However, the majority
+	of the pairs had correlation close to zero 
+	(Fig. \ref{figure:correlationComponentsHisto}).
+
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.85]{validation_small_set_2_joined_correlation_high_corr.png}
@@ -174,27 +186,54 @@
 
 	\newpage
 
+	The plot that visualises absolute maximum correlation coefficients between 
+	pairs of components has two curves (Fig. \ref{figure:correlationComponentsMax}). 
+	The grey curve provides raw coefficient correlation values - there are peaks 
+	at ESM-1b positions that correspond with positions that have the 
+	biggest number of high (absolute value above 0.5) correlation coefficients
+	(Fig. \ref{figure:highCorrelationComponents}). The blue curve shows the trend 
+	of absolute maximum values of correlation coefficients along the ESM-1b components.
+	None of the peaks of the trend curve does not overstep 0.5. Therefore, it can 
+	be concluded that there are no intervals of ESM-1b components that would have 
+	considerably high correlation with ProtTrans components.
+
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.85]{validation_small_set_2_joined_correlation_max.png}
 
-		\caption{Plot of ESM-1b components' maximum correlation coefficients with 
-		ProtTrans components}
+		\caption{Plot of ESM-1b components' absolute maximum correlation coefficients 
+		with ProtTrans components}
 		\label{figure:correlationComponentsMax}
 	\end{figure}
 
 	\newpage
 
+	The observations that can be made from the plot of averaged correlation 
+	coefficients (Fig. \ref{figure:correlationComponentsMean}) does not change the overview of the correlation between 
+	ESM-1b and ProtTrans components - the trend of mean correlation coefficients 
+	fluctuates around 0.1
+
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.85]{validation_small_set_2_joined_correlation_mean.png}
 
-		\caption{Plot of ESM-1b components' averaged  correlation coefficients 
+		\caption{Plot of ESM-1b components' mean correlation coefficients 
 		with ProtTrans components}
 		\label{figure:correlationComponentsMean}
 	\end{figure}
 
 	\newpage
+
+	Additionally, it was attempted to analyse correlation coefficients between 
+	embeddings' principal components that explain 95 percent of data variation.
+
+	The analogous scatter plot of the number of absolute correlation 
+	coefficients higher than 0.5 was drawn for principal components
+	(Fig. \ref{figure:highCorrelationComponentsPC95}). The plot 
+	demonstrated that there are few high correlation coefficients 
+	between components' pairs overall, this observation is supported 
+	by the histogram of correlation coefficients as well 
+	(Fig. \ref{figure:correlationComponentsHistoPC95}).
 
 	\begin{figure}[h!]
 		\centering
@@ -218,6 +257,17 @@
 	\end{figure}
 
 	\newpage
+
+	The curve of absolute maximum correlation coefficients shows 
+	that there is a trend of correlation coefficients to decrease 
+	as the index of ESM-1b component is increasing 
+	(Fig. \ref{figure:correlationComponentsMaxPC95}). The following 
+	plot of mean correlation coefficients 
+	(Fig. \ref{figure:correlationComponentsMeanPC95}) supports the 
+	statement that high maximum values of absolute correlation 
+	coefficients are not dominating between the first ESM-1b 
+	principal components and all ProtTrans principal components
+	because the mean correlation is very small between is pairs.
 
 	\begin{figure}[h!]
 		\centering
