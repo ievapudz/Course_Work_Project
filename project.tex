@@ -54,7 +54,7 @@
         
         \vspace*{2cm}
         \large
-        Vilnius, 2022
+        Vilnius, 2023
 	\end{center}
 	
 	\newpage
@@ -67,10 +67,45 @@
 
 	This work is a prolongation of the previous work - the model 
 	that performed binary classification into thermostability 
-	classes. The model took ESM-1b protein embeddings as input 
+	classes. The model, which was a single-layer perceptron (SLP), 
+    took protein language model's ESM-1b protein embeddings as input 
 	and provided prediction for each protein, how likely it 
 	belongs to the thermostable class.
-        
+
+    The classes of thermostability were defined the following 
+    way: proteins that were considered as stable in lower that 
+    65 degrees of Celsius were labelled with '0' and proteins
+    that were thermostable in temperatures of 65 degrees and 
+    higher were labelled with '1'. 
+    
+    Classifier was trained on the data set, in which the 
+    growth temperatures of collected organisms were known. The 
+    data set contained proteome identifiers, which were used 
+    to collect proteins and label them according to the 
+    organism's growth temperature. 
+
+    Nevertheless the classifier showed promising results, yet an
+    important downside of the developed method was emphasized -
+    since ESM-1b embeddings generation was limited by the size 
+    of the protein, the model could not provide predictions for 
+    proteins that were longer than 1022 amino acids. For this 
+    reason, it was decided to try ProtTrans embeddings as an 
+    input for the classification model.
+
+    Furthermore, it was interesting to exploit not only mean 
+    embeddings, but also to check, whether a different 
+    summarisation of per residue embeddings would improve the 
+    performance of the classification model.
+
+    In addition to these fixed tasks, it was determined to 
+    examine whether other variants of model architectures 
+    would elaborate the classifier's results.
+
+    The outcomes of this collection of tasks will 
+    contribute in creation of the final definition of the method
+    for binary protein classification into thermostability 
+    classes.
+
 	\normalsize
 
 	\newpage
@@ -78,7 +113,48 @@
 	\section{Abstract in Lithuanian (Santrauka)}
 
 	\begin{otherlanguage}{lithuanian}
-		
+	
+    Šis darbas yra ankstesnio darbo - binarinę baltymų klasifikaciją 
+    pagal termostabilumą vykdančio modelio vystymo - tęsinys. Vystomas
+    modelis buvo vieno sluoksnio perceptronas, kurio įvestis ESM-1b
+    baltymų kalbos modelio generuojamos skaitinės reprezentacijos, o
+    išvestis - prognozė kiekvienam baltymui, kaip tikėtina, kad jis 
+    priklauso termostabilių baltymų klasei.
+    
+    Termostabilumo klasės buvo atskirtos 65 Celsijaus laipsnių riba:
+    baltymai, kurie yra stabilūs žemesnėje nei nurodyta riba 
+    temperatūroje, priskiriami klasei su žyme '0', o stabilūs 
+    baltymai 65 laipsnių ir aukštesnėje temperatūroje yra 
+    laikomi klasės '1' nariais.
+    
+    Klasifikatorius buvo apmokytas naudojant duomenų rinkinį, kuriame
+    saugomos organizmų augimo temperatūros. Duomenų rinkinyje taip pat
+    buvo išsaugoti organizmų proteomų identifikatoriai, kurie buvo
+    panaudoti surinkti proteomui priklausančius baltymus ir juos 
+    sužymėti pagal organizmo augimo temperatūrą.
+
+    Nepaisant to, kad klasifikatorius suteikė neblogus rezultatus,
+    testuojant metodą išryškėjo svarbus trūkumas. Kadangi ESM-1b
+    skaitinių reprezentacijų kūrimas buvo apribotas baltymo ilgiu,
+    nebuvo galima sugeneruoti reprezentacijų baltymams, kurie buvo 
+    ilgesni nei 1022 aminorūgštys. Dėl šios priežasties buvo nutarta
+    išmėginti ProtTrans skaitines reprezentacijas kaip klasifikatoriaus
+    įvestį, nes šis baltymų kalbos modelis neturėjo apribojimo 
+    baltymo ilgiui. 
+
+    Taip pat domino išmėginti ne tik suvidurkintas skaitines 
+    reprezentacijas, bet ir išnaudoti galimybę išgauti kitaip
+    apibendrintas kiekvienos aminorūgšties reprezentacijas bei 
+    patikrinti, ar gauti kitokie įvesties vektoriai suteikia
+    geresnius rezultatus. 
+  
+    Apart reprezentacijų analizės, buvo įtraukti eksperimentai
+    patikrinimui, ar kitokios modelių architektūros gali turėti
+    įtakos modelio veikimui.
+      
+    Gautos analizių išvados suteiks naudingų įžvalgų galutinio
+    metodo baltymų klasifikacijai pagal termostabilumą apibrėžimui.
+
 	\end{otherlanguage}
 	
 	\newpage
@@ -150,12 +226,15 @@
 	\subsection{Analysed representations}
 	\label{analysedRepresentations}
 
-	Firstly, principal components of ESM-1b and ProtTrans
+	Consequently of the former work, this thesis includes 
+	analysis of ProtTrans protein language model's mean embeddings 
+	usage in protein classification. 
+
+	Besides the original mean embeddings, principal components 
+	of ESM-1b and ProtTrans
 	mean embeddings were retrieved and taken as input for the 
 	model. In particular, principal components that explained 
 	95 percent and 100 percent of the data variance were taken.
-	The data set for these representations analysis was picked 
-	the same as for the SLP analysis in the previous work.
 
 	\begin{table}[h!]
 		\caption{Sizes of the analysed principal components 
@@ -181,9 +260,9 @@
 	originally represented by ${m \times n}$ matrix, 
 	where ${m}$ is the number of dimensions of the chosen type of embedding
 	and ${n}$ is the number of amino acids that compose the protein. 
-	These representations were processed to get vectors of the same dimension 
+	These representations were processed to get vectors with the same dimension 
 	for each protein in the data set. The representations 
-	that were included in the analysis:
+	included in the analysis were:
 
 	\begin{enumerate}
 		\item Mean ESM-1b and ProtTrans 
@@ -196,6 +275,8 @@
 		\item Quantiles (including minimum and maximum) and mean ESM-1b and ProtTrans
 		\item Octiles (including minimum and maximum) ESM-1b and ProtTrans
 	\end{enumerate}
+
+    \newpage
 
 	\begin{table}[h!]
 		\caption{Sizes of the analysed representations' vectors}
@@ -220,6 +301,25 @@
 	\newpage
 
 	\subsection{Analysed architectures}
+
+	All representations that were described
+	in the previous section were taken as input for the baseline
+	single-layer perceptron models, although another important part 
+	of this work was to explore several different 
+	model architectures. 
+
+	Architectures that were chosen to run experiments with were
+	with one and two hidden layers. The sizes of hidden layers 
+	were chosen to be a set of original embeddings size divided 
+	by several factors of 2 (Tables \ref{table:modelArchitecturesESM} 
+	and \ref{table:modelArchitecturesPT}). To put it differently, since the 
+	size of the ESM-1b embedding is 1280, there were 
+	models defined with one hidden layer of size 640, 320, 160 
+	that take ESM-1b embeddings as input. For models with two 
+	hidden layers, sizes of hidden layers were assigned by 
+	combining two sequential sizes received from division. 
+	Analogously, the same operation was done for models adjusted 
+	for ProtTrans.
 
 	\begin{table}[h!]
 		\caption{Models that were tested with ESM-1b embeddings input}
