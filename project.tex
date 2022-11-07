@@ -309,12 +309,12 @@
 	model architectures. 
 
 	Architectures that were chosen to run experiments with were
-	with one and two hidden layers. The sizes of hidden layers 
+	with one or two hidden layers. The sizes of hidden layers 
 	were chosen to be a set of original embeddings size divided 
 	by several factors of 2 (Tables \ref{table:modelArchitecturesESM} 
 	and \ref{table:modelArchitecturesPT}). To put it differently, since the 
 	size of the ESM-1b embedding is 1280, there were 
-	models defined with one hidden layer of size 640, 320, 160 
+	models defined with one hidden layer of size 640, 320, or 160 
 	that take ESM-1b embeddings as input. For models with two 
 	hidden layers, sizes of hidden layers were assigned by 
 	combining two sequential sizes received from division. 
@@ -697,6 +697,8 @@
 	\ref{figure:scoresRepresentationsESM} and 
 	\ref{figure:scoresRepresentationsPT}).
 
+	\newpage
+
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.7]{SLP_ESM_003_diff_representations.png}
@@ -741,13 +743,12 @@
 
 	\section{Conclusions}
 
-	The results provided following conclusions:
+	The results of this work provided following conclusions:
 
 	\begin{enumerate}
-		\item 
+		\item For further analysis ProtTrans mean and octiles embeddings will be used.
+        \item The architecture with two hidden layers with sizes 512 and 256 will be further used for the neural network model.
 	\end{enumerate}
-
-	\newpage
 
 	\section{Availability}
 
