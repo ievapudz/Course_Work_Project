@@ -161,9 +161,35 @@
 
 	\section{Theory}
 
-	\subsection{ESM-1b embeddings}
-
 	\subsection{ProtTrans embeddings}
+
+	ProtTrans is a collection of protein Language Models 
+	(LMs) that were trained to learn information about 
+	proteins and encode it. ProtTrans embeddings are vector 
+	representations taken from the last hidden state of 
+	the protein LM. 
+
+	In particular, ProtT5-XL model was used in this work and 
+	exactly this model will be referred to by the name of 
+	'ProtTrans'. This model has 24 layers 
+	and the size of the hidden layer, from which the 
+	embedding is taken, is 1024. It was trained on 
+	BFD-100 data set 
+	and fine-tuned on UniRef50. Since, ProtT5-XL model was 
+	considered by the 
+	authors as the best-performing model, it was chosen to be 
+	applied in this work. Additionally, this model 
+	does not have 
+	positional encoding limit, which means that there are 
+	no limitations for the protein's size to process it 
+	if only the specifications of the model are taken into 
+	account. 
+
+	Furthermore, according to the article, in which ProtTrans
+	project was published, ProtT5-XL models (trained on BFD-100 
+	and UniRef50 data sets separately) outperformed ESM-1b model.
+	
+	
 
 	\newpage
 
