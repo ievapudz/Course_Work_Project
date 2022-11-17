@@ -68,33 +68,35 @@
 	This work is a prolongation of the previous work - the model 
 	that performed binary classification into thermostability 
 	classes. The model, which was a single-layer perceptron (SLP), 
-    took protein language model's ESM-1b protein embeddings as input 
+    took protein language model's ESM-1b \cite{rives2021biological} 
+	protein embeddings as input 
 	and provided prediction for each protein, how likely it 
 	belongs to the thermostable class.
 
     The classes of thermostability were defined the following 
     way: proteins that were considered as stable in lower that 
-    65 degrees of Celsius were labelled with '0' and proteins
-    that were thermostable in temperatures of 65 degrees and 
-    higher were labelled with '1'. 
+    65 degrees of Celsius were labelled with '0' and the remaining
+	proteins were labelled with '1'. 
     
-    Classifier was trained on the data set, in which the 
-    growth temperatures of collected organisms were known. The 
-    data set contained proteome identifiers, which were used 
-    to collect proteins and label them according to the 
-    organism's growth temperature. 
+    The classifier was trained on the data set 
+	\cite{engqvist_martin_karl_magnus_2018_1175609} that contained 
+	proteome identifiers, which were used 
+    to collect proteins. The data set also contained information 
+	about organism's growth temperature, therefore proteins that 
+	belonged to a particular proteome were labelled accordingly . 
 
     Nevertheless the classifier showed promising results, yet an
     important downside of the developed method was emphasized -
     since ESM-1b embeddings generation was limited by the size 
     of the protein, the model could not provide predictions for 
     proteins that were longer than 1022 amino acids. For this 
-    reason, it was decided to try ProtTrans embeddings as an 
+    reason, it was decided to try ProtTrans 
+	\cite{elnaggar2020prottrans} embeddings as an 
     input for the classification model.
 
     Furthermore, it was interesting to exploit not only mean 
     embeddings, but also to check, whether a different 
-    summarisation of per residue embeddings would improve the 
+    connection of per residue embeddings would improve the 
     performance of the classification model.
 
     In addition to these fixed tasks, it was determined to 
@@ -116,7 +118,8 @@
 	
     Šis darbas yra ankstesnio darbo - binarinę baltymų klasifikaciją 
     pagal termostabilumą vykdančio modelio vystymo - tęsinys. Vystomas
-    modelis buvo vieno sluoksnio perceptronas, kurio įvestis ESM-1b
+    modelis buvo vieno sluoksnio perceptronas, kurio įvestis ESM-1b 
+	\cite{rives2021biological}
     baltymų kalbos modelio generuojamos skaitinės reprezentacijos, o
     išvestis - prognozė kiekvienam baltymui, kaip tikėtina, kad jis 
     priklauso termostabilių baltymų klasei.
@@ -127,19 +130,23 @@
     baltymai 65 laipsnių ir aukštesnėje temperatūroje yra 
     laikomi klasės '1' nariais.
     
-    Klasifikatorius buvo apmokytas naudojant duomenų rinkinį, kuriame
-    saugomos organizmų augimo temperatūros. Duomenų rinkinyje taip pat
-    buvo išsaugoti organizmų proteomų identifikatoriai, kurie buvo
+    Minėtas klasifikatorius buvo apmokytas naudojant duomenų rinkinį, 
+	kuriame
+    saugomos organizmų augimo temperatūros 
+	\cite{engqvist_martin_karl_magnus_2018_1175609}. Į duomenų rinkinį 
+	taip pat
+    buvo įtraukti organizmų proteomų identifikatoriai, kurie buvo
     panaudoti surinkti proteomui priklausančius baltymus ir juos 
     sužymėti pagal organizmo augimo temperatūrą.
 
-    Nepaisant to, kad klasifikatorius suteikė neblogus rezultatus,
+    Nepaisant to, kad klasifikatorius pateikė neblogus rezultatus,
     testuojant metodą išryškėjo svarbus trūkumas. Kadangi ESM-1b
     skaitinių reprezentacijų kūrimas buvo apribotas baltymo ilgiu,
     nebuvo galima sugeneruoti reprezentacijų baltymams, kurie buvo 
     ilgesni nei 1022 aminorūgštys. Dėl šios priežasties buvo nutarta
-    išmėginti ProtTrans skaitines reprezentacijas kaip klasifikatoriaus
-    įvestį, nes šis baltymų kalbos modelis neturėjo apribojimo 
+    išmėginti ProtTrans \cite{elnaggar2020prottrans} skaitines 
+	reprezentacijas kaip klasifikatoriaus
+    įvestį, nes šis baltymų kalbos modelis buvo apmokytas be apribojimo 
     baltymo ilgiui. 
 
     Taip pat domino išmėginti ne tik suvidurkintas skaitines 
@@ -148,9 +155,10 @@
     patikrinti, ar gauti kitokie įvesties vektoriai suteikia
     geresnius rezultatus. 
   
-    Apart reprezentacijų analizės, buvo įtraukti eksperimentai
-    patikrinimui, ar kitokios modelių architektūros gali turėti
-    įtakos modelio veikimui.
+    Apart reprezentacijų analizės, taip pat buvo atlikti 
+	eksperimentai
+    patikrinimui, ar kitokios modelių architektūros turės
+    ženklios įtakos modelio veikimui.
       
     Gautos analizių išvados suteiks naudingų įžvalgų galutinio
     metodo baltymų klasifikacijai pagal termostabilumą apibrėžimui.
@@ -163,8 +171,8 @@
 
 	\subsection{ProtTrans embeddings}
 
-	ProtTrans\cite{elnaggar2020prottrans} is a collection 
-	of protein Language Models 
+	ProtTrans \cite{elnaggar2020prottrans} is a collection 
+	of protein language models 
 	(LMs) that were trained to learn information about 
 	proteins and encode it. ProtTrans embeddings are vector 
 	representations taken from the last hidden state of 
@@ -172,26 +180,22 @@
 
 	In particular, ProtT5-XL model was used in this work and 
 	exactly this model will be referred to by the name of 
-	'ProtTrans'. This model has 24 layers 
-	and the size of the hidden layer, from which the 
-	embedding is taken, is 1024. It was trained on 
+	'ProtTrans'. Overall, this model has 24 layers. In particular, 
+	the size of the hidden layer, from which the 
+	embedding is taken, is 1024. This model was trained on 
 	BFD-100 data set 
-	and fine-tuned on UniRef50. Since, ProtT5-XL model was 
+	and fine-tuned on UniRef50. Since ProtT5-XL model was 
 	considered by the 
 	authors as the best-performing model, it was chosen to be 
 	applied in this work. Additionally, this model 
 	does not have 
-	positional encoding limit, which means that there are 
-	no limitations for the protein's size to process it 
-	if only the specifications of the model are taken into 
-	account. 
+	positional encoding limit, which means that there is no 
+	limitation for the protein's size to generate its embedding. 
 
 	Furthermore, according to the article, in which ProtTrans
 	project was published, ProtT5-XL models (trained on BFD-100 
 	and UniRef50 data sets separately) 
-	outperformed ESM-1b\cite{rives2021biological} model.
-
-	
+	outperformed ESM-1b \cite{rives2021biological} model.
 
 	\newpage
 
@@ -202,9 +206,9 @@
 	The main objective of this work is to analyse 
 	which numerical representation of proteins is the most 
 	suitable to use as input for the neural network 
-	model to make binary protein classification into thermostability
-	classes. Additionally, it was decided to try model 
-	architectures with one or two hidden layers and evaluate 
+	model that solves our thermostability prediction problem. 
+	Additionally, it was decided to try model 
+	architectures with one or two hidden layers and evaluate, 
 	whether the different architecture improves the 
 	performance.
 
@@ -254,7 +258,7 @@
 	\subsection{Analysed representations}
 	\label{analysedRepresentations}
 
-	Consequently of the former work, this thesis includes 
+	As a consequence of the former work, this thesis includes 
 	analysis of ProtTrans protein language model's mean embeddings 
 	usage in protein classification. 
 
@@ -262,7 +266,7 @@
 	of ESM-1b and ProtTrans
 	mean embeddings were retrieved and taken as input for the 
 	model. In particular, principal components that explained 
-	95 percent and 100 percent of the data variance were taken.
+	95 percent and 100 percent of the data variance were picked.
 
 	\begin{table}[h!]
 		\caption{Sizes of the analysed principal components 
@@ -271,7 +275,7 @@
 		\centering
 		\begin{tabular}{ | c | c c | }
 			\hline 
-			 & ESM-1b & ProtTrans \\
+			Explained variance & ESM-1b & ProtTrans \\
 			\hline 
 			95\% & 540 & 453 \\
 			100\% & 1280 & 1024 \\
@@ -288,7 +292,8 @@
 	originally represented by ${m \times n}$ matrix, 
 	where ${m}$ is the number of dimensions of the chosen type of embedding
 	and ${n}$ is the number of amino acids that compose the protein. 
-	These representations were processed to get vectors with the same dimension 
+	These representations are processed to get vectors with the same 
+	dimension 
 	for each protein in the data set. The representations 
 	included in the analysis were:
 
@@ -336,11 +341,11 @@
 	of this work was to explore several different 
 	model architectures. 
 
-	Architectures that were chosen to run experiments with were
-	with one or two hidden layers. The sizes of hidden layers 
-	were chosen to be a set of original embeddings size divided 
-	by several factors of 2 (Tables \ref{table:modelArchitecturesESM} 
-	and \ref{table:modelArchitecturesPT}). To put it differently, since the 
+	Architectures that were chosen to run experiments with 
+	had one or two hidden layers. The sizes of hidden layers 
+	were chosen to be original embeddings size divided 
+	by several multiples of 2 (Tables \ref{table:modelArchitecturesESM} 
+	and \ref{table:modelArchitecturesPT}). That is, since the 
 	size of the ESM-1b embedding is 1280, there were 
 	models defined with one hidden layer of size 640, 320, or 160 
 	that take ESM-1b embeddings as input. For models with two 
@@ -395,14 +400,14 @@
 
 	One of the tasks of this work was to try joined ESM-1b and ProtTrans 
 	representations and pass them as input to the thermostability 
-	classification model. It was decided to analyse the correlation 
-	coefficients between the components of these embeddings. 
+	classification model. Additionally, the correlation 
+	coefficients between the components of these embeddings were analysed. 
 
 	The results of the analysis showed that there are five ESM-1b
 	embeddings' components that have absolute correlation coefficients 
 	higher than 0.5 with more than 10 ProtTrans embeddings' components  
-	(Figure \ref{figure:highCorrelationComponents}). However, the majority
-	of the pairs had correlation coefficients close to zero 
+	(Figure \ref{figure:highCorrelationComponents}). However, overall the 
+	majority of components' pairs had correlation coefficients close to zero 
 	(Figure \ref{figure:correlationComponentsHisto}).
 
 	\begin{figure}[h!]
@@ -538,7 +543,7 @@
 	\subsection{Representation analysis}
 
 	The first step of the analysis was to try ProtTrans embeddings 
-	as input for the single-layer neural network model and compare 
+	as input for the SLP model and compare 
 	its results with the testing metrics of model trained with 
 	ESM-1b. For the comparison, the primary model with ESM-1b was 
 	retrained using the filtered data set. The comparison disclosed 
@@ -576,7 +581,7 @@
 	components of protein embeddings showed that overfitting can be 
 	done successfully.
 
-	Furthermore, it was decided to check whether 
+	Therefore, it was decided to check whether 
 	a vector of principal components could be a suitable input for the binary 
 	classification task. The testing stage metrics showed worse model's performance 
 	than using the original representations (Tables \ref{table:comparisonESMandPTdup}, 
@@ -648,6 +653,8 @@
 		\label{table:comparisonESMandPTPC100}
 	\end{table}
 
+	\newpage
+
 	Before joining the embeddings, the normalisation of ESM-1b and ProtTrans 
 	vectors was done. Normalised representations were taken as input to 
 	the model with the same SLP architecture. For both types of embeddings 
@@ -678,7 +685,7 @@
 	After joining ESM-1b and ProtTrans mean embeddings, an SLP was trained 
 	using these joined representations. The results of this model were similar 
 	to the scores of the model that was trained using only ProtTrans embeddings, 
-	yet the results 
+	though the results 
 	were not improved (Tables \ref{table:comparisonESMandPT} and 
 	\ref{table:comparisonJoinedAndJoinedNorm}). 
 
@@ -716,10 +723,11 @@
 
 	Nonetheless, ProtTrans already demonstrated the impact for the 
 	model's improvement on the performance, it was decided to finish up 
-	the different representation and architecture analysis using both 
-	types of embeddings. Although, the results of the consequent analysis 
+	the different representation and architecture analysis using embeddings
+	of both protein language models for completeness. The results 
+	of the consequent analysis 
 	did not change the conclusion regarding ProtTrans influence for the 
-	results for any variation of analysed representations (listed in the
+	results using any variation of analysed representations (listed in the
 	section \ref{analysedRepresentations}) - in all cases model that took 
 	ProtTrans embeddings as input performed significantly better (Figures 
 	\ref{figure:scoresRepresentationsESM} and 
@@ -771,12 +779,11 @@
 
 	\section{Conclusions}
 
-	The results of this work provided following conclusions:
-
-	\begin{enumerate}
-		\item For further analysis ProtTrans mean and octiles embeddings will be used.
-        \item The architecture with two hidden layers with sizes 512 and 256 will be further used for the neural network model.
-	\end{enumerate}
+	The results of this work provided following conclusions: for 
+	further development of the final method ProtTrans mean and 
+	octiles embeddings will be used. Additionally, this work 
+	showed that it is worth to use the model's architecture with 
+	two hidden layers with sizes 512 and 256.
 
 	\section{Availability}
 
