@@ -83,7 +83,7 @@
 	proteome identifiers, which were used 
     to collect proteins. The data set also contained information 
 	about organism's growth temperature, therefore proteins that 
-	belonged to a particular proteome were labelled accordingly . 
+	belonged to a particular proteome were labelled accordingly. 
 
     Nevertheless the classifier showed promising results, yet an
     important downside of the developed method was emphasized -
@@ -287,9 +287,9 @@
 	Furthermore, both protein language models - ESM-1b and 
 	ProtTrans - provide 
 	per token or per residue representations - each 
-	amino acid of the protein gets 1280 or 1024-dimensional vector from
+	amino acid of the protein gets a 1280 or 1024-dimensional vector from
 	ESM-1b or ProtTrans model respectively. Therefore, each protein is 
-	originally represented by ${m \times n}$ matrix, 
+	originally represented by the ${m \times n}$ matrix, 
 	where ${m}$ is the number of dimensions of the chosen type of embedding
 	and ${n}$ is the number of amino acids that compose the protein. 
 	These representations are processed to get vectors with the same 
@@ -414,8 +414,8 @@
 		\centering
 		\includegraphics[scale=0.85]{validation_small_set_2_joined_correlation_high_corr.png}
 
-		\caption{Plot of ESM-1b components that have got correlation 
-		coefficients with high absolute values with ProtTrans components}
+		\caption{Plot of ESM-1b components that have got high absolute correlation 
+		coefficients with ProtTrans components}
 		\label{figure:highCorrelationComponents}
 	\end{figure}
 
@@ -719,7 +719,7 @@
 	representations are used, the process of normalisation depends on the data 
 	set, which is not convenient in the process of development until the 
 	final data set is established. Therefore, the optimal choice for 
-	this stage of development was ProtTrans embeddings.
+	this stage of development was mean ProtTrans embeddings.
 
 	Nonetheless, ProtTrans already demonstrated the impact for the 
 	model's improvement on the performance, it was decided to finish up 
