@@ -16,6 +16,9 @@
 
 \thispagestyle{empty}
 
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
 \begin{document}
 	\begin{center}
 
@@ -548,28 +551,7 @@
 	ESM-1b. For the comparison, the primary model with ESM-1b was 
 	retrained using the filtered data set. The comparison disclosed 
 	that the model that uses ProtTrans embeddings as input performs 
-	better (Table \ref{table:comparisonESMandPT}).
-
-	\begin{table}[h!]
-		\caption{The comparison of scores between models trained with ESM-1b
-		and ProtTrans mean representations}
-		\vspace{0.2cm}
-		\centering
-		\begin{tabular}{ | c | c c | }
-			\hline 
-						
-			& ESM-1b & ProtTrans \\
-			\hline 
-			MCC & 0.843 & 0.901 \\
-			Accuracy & 0.921 & 0.951 \\
-			Loss & 0.208 & 0.128 \\
-			Precision & 0.921 & 0.949 \\
-			Recall & 0.917 & 0.949 \\
-			ROC AUC & 0.979 & 0.990 \\
-			\hline    
-		\end{tabular}
-		\label{table:comparisonESMandPT}
-	\end{table}
+	better (Table \ref{table:comparisonESMandPTmeanNormMeanJoined}).
 
 	Out of the scope of this representation and model architecture analysis
 	for binary classification, there were several attempts made to overtrain
@@ -584,73 +566,29 @@
 	Therefore, it was decided to check whether 
 	a vector of principal components could be a suitable input for the binary 
 	classification task. The testing stage metrics showed worse model's performance 
-	than using the original representations (Tables \ref{table:comparisonESMandPTdup}, 
-	\ref{table:comparisonESMandPTPC95} and 
-	\ref{table:comparisonESMandPTPC100}). 
+	than using the original representations (Tables \ref{table:comparisonESMandPTunfiltMeanPC}). 
 
 	\begin{table}[h!]
 		\caption{The comparison of scores between models trained with ESM-1b
-		and ProtTrans mean representations of an unfiltered data set}
+		and ProtTrans mean representations and their principal components 
+		that account for 95\% and 100\% of the unfiltered data set variance}
 		\vspace{0.2cm}
 		\centering
-		\begin{tabular}{ | c | c c | }
+		\begin{tabular}{ | c | c c c c c c | }
 			\hline 
 						
-			& ESM-1b & ProtTrans \\
+			& \specialcell{Mean\\ESM-1b} & \specialcell{Mean\\ProtTrans} & \specialcell{ESM-1b\\(95\%)} & \specialcell{ProtTrans\\(95\%)} & \specialcell{ESM-1b\\(100\%)} & \specialcell{ProtTrans\\(100\%)} \\
 			\hline 
-			MCC & 0.843 & 0.902 \\
-			Accuracy & 0.922 & 0.951 \\
-			Loss & 0.208 & 0.128 \\
-			Precision & 0.919 & 0.949 \\
-			Recall & 0.921 & 0.951 \\
-			ROC AUC & 0.979 & 0.990 \\
-			\hline    
-		\end{tabular}
-		\label{table:comparisonESMandPTdup}
-	\end{table}
+			MCC & 0.843 & 0.902 & 0.699 & 0.767 & 0.698 & 0.766 \\
+			Accuracy  & 0.922 & 0.951 & 0.845 & 0.880 & 0.845 & 0.879 \\
+			Loss & 0.208 & 0.128 & 0.383 & 0.442 & 0.382 & 0.443 \\
+			Precision & 0.919 & 0.949 & 0.910 & 0.940 & 0.909 & 0.939 \\
+			Recall & 0.921 & 0.951 & 0.768 & 0.813 & 0.767 & 0.812 \\
+			ROC AUC & 0.979 & 0.990 & 0.901 & 0.945 & 0.901 & 0.943 \\
 
-	\begin{table}[h!]
-		\caption{The comparison of scores between models trained with ESM-1b
-		and ProtTrans mean representations' principal components 
-		that account for 95\% of the unfiltered data set variance}
-		\vspace{0.2cm}
-		\centering
-		\begin{tabular}{ | c | c c | }
-			\hline 
-						
-			& ESM-1b & ProtTrans \\
-			\hline 
-			MCC & 0.699 & 0.767 \\
-			Accuracy & 0.845 & 0.880 \\
-			Loss & 0.383 & 0.442 \\
-			Precision & 0.910 & 0.940 \\
-			Recall & 0.768 & 0.813 \\
-			ROC AUC & 0.901 & 0.945 \\
 			\hline    
 		\end{tabular}
-		\label{table:comparisonESMandPTPC95}
-	\end{table}
-
-	\begin{table}[h!]
-		\caption{The comparison of scores between models trained with ESM-1b
-		and ProtTrans mean representations' principal components 
-		that account for 100\% of the unfiltered data set variance}
-		\vspace{0.2cm}
-		\centering
-		\begin{tabular}{ | c | c c | }
-			\hline 
-						
-			& ESM-1b & ProtTrans \\
-			\hline 
-			MCC & 0.698 & 0.766 \\
-			Accuracy & 0.845 & 0.879 \\
-			Loss & 0.382 & 0.443 \\
-			Precision & 0.909 & 0.939 \\
-			Recall & 0.767 & 0.812 \\
-			ROC AUC & 0.901 & 0.943 \\
-			\hline    
-		\end{tabular}
-		\label{table:comparisonESMandPTPC100}
+		\label{table:comparisonESMandPTunfiltMeanPC}
 	\end{table}
 
 	\newpage
@@ -658,57 +596,35 @@
 	Before joining the embeddings, the normalisation of ESM-1b and ProtTrans 
 	vectors was done. Normalised representations were taken as input to 
 	the model with the same SLP architecture. For both types of embeddings 
-	the results were improved (Tables \ref{table:comparisonESMandPT} and
-	\ref{table:normalisedESMAndPTScores}).
-
-	\begin{table}[h!]
-		\caption{The comparison of SLPs', which were 
-		trained with normalised ESM-1b and ProtTrans mean 
-		representations, testing stage scores}
-		\vspace{0.2cm}
-		\centering
-		\begin{tabular}{ | c | c c | }
-			\hline 	
-			& ESM-1b & ProtTrans \\
-			\hline 
-			MCC & 0.858 & 0.915 \\
-			Accuracy & 0.929 & 0.957 \\
-			Loss & 0.248 & 0.143 \\
-			Precision & 0.923 & 0.951 \\
-			Recall & 0.931 & 0.962 \\
-			ROC AUC & 0.982 & 0.991 \\
-			\hline    
-		\end{tabular}
-		\label{table:normalisedESMAndPTScores}
-	\end{table}
+	the results were improved (Table \ref{table:comparisonESMandPTmeanNormMeanJoined}).
 
 	After joining ESM-1b and ProtTrans mean embeddings, an SLP was trained 
 	using these joined representations. The results of this model were similar 
 	to the scores of the model that was trained using only ProtTrans embeddings, 
 	though the results 
-	were not improved (Tables \ref{table:comparisonESMandPT} and 
-	\ref{table:comparisonJoinedAndJoinedNorm}). 
+	did not improve (Table \ref{table:comparisonESMandPTmeanNormMeanJoined}). 
 
 	\begin{table}[h!]
 		\caption{The comparison of testing stage scores between 
-		models trained with ESM-1b and ProtTrans mean 
+		models trained with mean, normalised mean, joined mean, 
+		and normalised joined ESM-1b and ProtTrans 
 		representations}
 		\vspace{0.2cm}
 		\centering
-		\begin{tabular}{ | c | c c | }
+		\begin{tabular}{ | c | c c c c c c | }
 			\hline 
 						
-			& Joined & Normalised joined \\
+			& ESM-1b & \specialcell{Normalised\\ESM-1b} & ProtTrans & \specialcell{Normalised\\ProtTrans} & Joined & \specialcell{Normalised\\joined} \\
 			\hline 
-			MCC & 0.899 & 0.920 \\
-			Accuracy & 0.949 & 0.960 \\
-			Loss & 0.131 & 0.139 \\
-			Precision & 0.945 & 0.954 \\
-			Recall & 0.951 & 0.964 \\
-			ROC AUC & 0.991 & 0.992 \\
+			MCC & 0.843 & 0.858 & 0.901 & 0.915 & 0.899 & 0.920 \\
+			Accuracy & 0.921 & 0.929 & 0.951 & 0.957 & 0.949 & 0.960 \\
+			Loss & 0.208 & 0.248 & 0.128 & 0.143 & 0.131 & 0.139 \\
+			Precision & 0.921 & 0.923 & 0.949 & 0.951 & 0.945 & 0.954 \\
+			Recall & 0.917 & 0.931 & 0.949 & 0.962 & 0.951 & 0.964 \\
+			ROC AUC & 0.979 & 0.982 & 0.990 & 0.991 & 0.991 & 0.992 \\
 			\hline    
 		\end{tabular}
-		\label{table:comparisonJoinedAndJoinedNorm}
+		\label{table:comparisonESMandPTmeanNormMeanJoined}
 	\end{table}
 
 	However, joining the normalised ESM-1b and ProtTrans mean representations 
