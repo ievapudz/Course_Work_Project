@@ -635,28 +635,24 @@
 	did not change the conclusion regarding ProtTrans influence for the 
 	results using any variation of analysed representations (listed in the
 	section \ref{analysedRepresentations}) - in all cases model that took 
-	ProtTrans embeddings as input performed significantly better (Figures 
-	\ref{figure:scoresRepresentationsESM} and 
-	\ref{figure:scoresRepresentationsPT}).
+	ProtTrans embeddings as input performed significantly better (Figure 
+	\ref{figure:scoresRepresentationsESMandPT}).
 
 	\newpage
 
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[scale=0.7]{SLP_ESM_003_diff_representations.png}
+		\begin{tabular}{@{}c@{}}
+			\includegraphics[scale=0.7]{SLP_ESM_003_diff_representations.png}
+		\end{tabular}
 
+		\begin{tabular}{@{}c@{}}
+			\includegraphics[scale=0.7]{SLP_PT_003_diff_representations.png}
+		\end{tabular}
+		
 		\caption{Comparison of SLP models', which were trained with different
-		ESM-1b representations, MCC and ROC AUC scores}
-		\label{figure:scoresRepresentationsESM}
-	\end{figure}
-
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.7]{SLP_PT_003_diff_representations.png}
-
-		\caption{Comparison of SLP models', which were trained with different
-		ProtTrans representations, MCC and ROC AUC scores}
-		\label{figure:scoresRepresentationsPT}
+		ESM-1b and ProtTrans representations, MCC and ROC AUC scores}
+		\label{figure:scoresRepresentationsESMandPT}
 	\end{figure}
 
 	\newpage
@@ -665,20 +661,17 @@
 
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[scale=0.6]{MLP_ESM.png}
+		\begin{tabular}{@{}c@{}}
+			\includegraphics[scale=0.6]{MLP_ESM.png}
+		\end{tabular}
 
-		\caption{Comparison of models', which were trained using 
-		ESM-1b embeddings, MCC and ROC AUC scores}
-		\label{figure:scoresMLP_ESM}
-	\end{figure}
-
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.6]{MLP_PT.png}
-
-		\caption{Comparison of models', which were trained using 
-		ProtTrans embeddings, MCC and ROC AUC scores}
-		\label{figure:scoresMLP_PT}
+		\begin{tabular}{@{}c@{}}
+			\includegraphics[scale=0.6]{MLP_PT.png}
+		\end{tabular}
+		
+		\caption{Comparison of different architecture models', which were trained using 
+		ESM-1b or ProtTrans embeddings, MCC and ROC AUC scores}
+		\label{figure:scoresMLP_ESMandPT}
 	\end{figure}
 
 	\newpage
