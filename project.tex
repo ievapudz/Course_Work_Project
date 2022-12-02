@@ -436,7 +436,7 @@
 	\newpage
 
 	The plot that visualises absolute maximum correlation coefficients between 
-	pairs of components has two curves (Figure \ref{figure:correlationComponentsMax}). 
+	pairs of components has two curves (Figure \ref{figure:correlationComponentsMaxAndMean}). 
 	The grey curve provides raw coefficient correlation values - there are peaks 
 	at ESM-1b positions that correspond with positions that have the 
 	biggest number of high (absolute value above 0.5) correlation coefficients
@@ -446,30 +446,25 @@
 	be concluded that there are no intervals of ESM-1b components that have 
 	a considerably high correlation with ProtTrans components.
 
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.85]{validation_small_set_2_joined_correlation_max.png}
-
-		\caption{Plot of ESM-1b components' maximum absolute correlation coefficients 
-		with ProtTrans components}
-		\label{figure:correlationComponentsMax}
-	\end{figure}
-
-	\newpage
-
 	The observations that can be made from the plot of averaged correlation 
-	coefficients (Figure \ref{figure:correlationComponentsMean}) do not change the 
+	coefficients (Figure \ref{figure:correlationComponentsMaxAndMean}) do not change the 
 	overview of the correlation between 
 	ESM-1b and ProtTrans components - the trend of mean correlation coefficients 
-	fluctuates around 0.1
+	fluctuates around 0.1.
 
-	\begin{figure}[h!]
+	\begin{figure}
 		\centering
-		\includegraphics[scale=0.85]{validation_small_set_2_joined_correlation_mean.png}
+		\begin{tabular}{@{}c@{}}
+			\includegraphics[scale=0.85]{validation_small_set_2_joined_correlation_max.png}
+		\end{tabular}
 
-		\caption{Plot of ESM-1b components' mean correlation coefficients 
-		with ProtTrans components}
-		\label{figure:correlationComponentsMean}
+		\begin{tabular}{@{}c@{}}
+			\includegraphics[scale=0.85]{validation_small_set_2_joined_correlation_mean.png}
+		
+		\end{tabular}
+		
+		\caption{Plots of ESM-1b components' maximum and mean absolute correlation coefficients 
+		with ProtTrans components}\label{figure:correlationComponentsMaxAndMean}
 	\end{figure}
 
 	\newpage
