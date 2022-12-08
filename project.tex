@@ -106,6 +106,13 @@
     examine whether other variants of model architectures 
     would elaborate the classifier's results.
 
+	The results of this analysis showed that the best embeddings 
+	representations to use until the final training data set is 
+	established are ProtTrans mean and octiles representations. 
+	The most suitable model architecture to solve protein 
+	classification in terms of thermostability is the feed-forward 
+	neural network with two hidden layers.
+
     The outcomes of this collection of tasks will 
     contribute in creation of the final definition of the method
     for binary protein classification into thermostability 
@@ -162,6 +169,14 @@
 	eksperimentai
     patikrinimui, ar kitokios modelių architektūros turės
     ženklios įtakos modelio veikimui.
+
+	Šios analizės rezultatai parodė, kad geriausia naudoti ProtTrans
+	vidurkių bei oktilių skaitines reprezentacijas, kol bus nustatytas 
+	galutinis duomenų rinkinys modelio apmokymui. Taip pat remiantis
+	gautais rezultatais galima teigti, kad geriausia modelio 
+	architektūra baltymų klasifikavimo pagal termostabilumą problemos
+	sprendimui yra neuroninio tinklo modelis su dviem paslėptais
+	sluoksniais.
       
     Gautos analizių išvados suteiks naudingų įžvalgų galutinio
     metodo baltymų klasifikacijai pagal termostabilumą apibrėžimui.
@@ -171,6 +186,37 @@
 	\newpage
 
 	\section{Theory}
+
+	\subsection{ESM-1b embeddings}
+
+	Due to the novelty of embeddings, a considerably good performance of
+	protein language models, and a recently emerged availability of embeddings,
+	it was decided to develop a neural network model that would take protein
+	embeddings as input and give the thermostability class
+	label as output.
+
+	ESM-1b is one of evolutionary scale models trained by Facebook Research 
+	\cite{rives2021biological}. The model has 33 layers and 650 million parameters. 
+	The model was trained in an 
+	unsupervised fashion on 
+	\href{ftp://ftp.uniprot.org/pub/databases/uniprot/uniref/uniref50}{UniRef50 data set}
+	(accessed March 28, 2018)\cite{suzek2015uniref}. In order 
+	to ensure
+	determinism in the validation set, authors removed protein sequences that
+	were longer than 1024 amino acids. 
+
+	The authors made a script to extract model's embeddings available in the 
+	\href{https://github.com/facebookresearch/esm}{repository "Evolutionary Scale Modelling"}.
+	The script allows to choose 
+	from which model and layer embeddings will be taken, what embeddings 
+	(mean, per amino acid, or beginning of the sequence token) to keep. In the
+	result of using the script, a 1280 dimensional vector for each protein is 
+	generated.
+	
+	The fact that sequences longer than 1024 amino acids were removed from the 
+	validation data set for ESM-1b model's training implies to the limitation of 
+	model's embeddings, which cannot be generated for sequences longer than 
+	1024 amino acids.
 
 	\subsection{ProtTrans embeddings}
 
@@ -357,6 +403,11 @@
 	Analogously, the same operation was done for models adjusted 
 	for ProtTrans.
 
+	In order to compare the SLP results with the results of new 
+	architectures, for all models the same hyperparameters 
+	of learning rate and 
+	batch size were set to be 0.0001 and 24 respectively.
+
 	\begin{table}[h!]
 		\caption{Models that were tested with ESM-1b embeddings input}
 		\vspace{0.2cm}
@@ -539,14 +590,14 @@
 	as input for the SLP model and compare 
 	its results with the testing metrics of model trained with 
 	ESM-1b. For the comparison, the primary model with ESM-1b was 
-	retrained using the filtered data set. The comparison disclosed 
-	that the model that uses ProtTrans embeddings as input performs 
+	trained again using the filtered data set. The comparison disclosed 
+	that the model, which uses ProtTrans embeddings as input, performs 
 	better (Table \ref{table:comparisonESMandPTmeanNormMeanJoined}).
 
 	Out of the scope of this representation and model architecture analysis
 	for binary classification, there were several attempts made to overtrain
 	the classification model to predict three thermostability classes (one 
-	more class added after dividing the zero-labelled class at the temperature
+	more class was added after dividing the zero-labelled class at the temperature
 	threshold of 40 degrees Celsius). The purpose of overtraining was to check 
 	whether the selected architecture has a potential to be trained for the 
 	multiclass classification problem. The usage of principal 
@@ -556,7 +607,7 @@
 	Therefore, it was decided to check whether 
 	a vector of principal components could be a suitable input for the binary 
 	classification task. The testing stage metrics showed worse model's performance 
-	than using the original representations (Tables \ref{table:comparisonESMandPTunfiltMeanPC}). 
+	than using the original representations (Table \ref{table:comparisonESMandPTunfiltMeanPC}). 
 
 	\begin{table}[h!]
 		\caption{The comparison of scores between models trained with ESM-1b
@@ -617,7 +668,7 @@
 		\label{table:comparisonESMandPTmeanNormMeanJoined}
 	\end{table}
 
-	\begin{figure}
+	\begin{figure}[!h]
 		\centering
 		
 		\includegraphics[scale=0.65]{ESM_PT_comparison_MCC_ROC_scores.png}
@@ -668,6 +719,18 @@
 
 	\subsection{Architecture analysis}
 
+	The final stage of work was to analyse, which architecture of the
+	model gives the best prediction results.
+
+	The results of SLP models were compared with the new models 
+	trained with mean embeddings of ESM-1b and ProtTrans (Figure 
+	\ref{figure:scoresMLP_ESMandPT}). Models that had 
+	hidden layers reached better results than the single-layer 
+	models: the best model that used ProtTrans embeddings reached
+	MCC of 0.916, meanwhile the SLP using ProtTrans embeddings 
+	reached MCC of 0.901, although the training time was 9 times 
+	longer.
+
 	\begin{figure}[h!]
 		\centering
 		\begin{tabular}{@{}c@{}}
@@ -689,9 +752,21 @@
 
 	The results of this work provided following conclusions: for 
 	further development of the final method ProtTrans mean and 
-	octiles embeddings will be used. Additionally, this work 
+	octiles embeddings will be used. Nevertheless, models that used 
+	mean ProtTrans embeddings did not provide as good results as 
+	the octiles representations in this work, due to more efficient 
+	training 
+	procedure with mean embeddings, both these representations will 
+	be used for the further development of the tool.
+	
+	Additionally, this work 
 	showed that it is worth to use the model's architecture with 
 	two hidden layers with sizes 512 and 256.
+
+	The next steps of the development will be to generate the 
+	mentioned representations for the bigger data set, which 
+	will be used to train the binary classification model with 
+	the architecture of two hidden layers.
 
 	\section{Availability}
 
