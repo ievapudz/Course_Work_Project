@@ -763,6 +763,29 @@
 	showed that it is worth to use the model's architecture with 
 	two hidden layers with sizes 512 and 256.
 
+	\begin{table}[h!]
+		\caption{The comparison of testing stage scores between SLP
+		models trained with mean, normalised mean, and octiles ProtTrans
+		representations and model's with 2 hidden layers trained with 
+		mean ProtTrans representations}
+		\vspace{0.2cm}
+		\centering
+		\begin{tabular}{ | c | c c c c | }
+			\hline 
+						
+			& Mean (SLP) & \specialcell{Normalised \\mean (SLP)} & Octiles (SLP) & \specialcell{Mean \\ (MLP h512-256)} \\
+			\hline 
+			MCC & 0.901 & 0.915 & 0.910 & 0.919 \\
+			Accuracy & 0.951 & 0.957 & 0.955 & 0.960 \\
+			Loss & 0.128 & 0.143 & 0.125 & 0.192 \\
+			Precision & 0.949 & 0.951 & 0.959 & 0.954 \\
+			Recall & 0.949 & 0.962 & 0.947 & 0.963 \\
+			ROC AUC & 0.990 & 0.991 & 0.992 & 0.993 \\
+			\hline    
+		\end{tabular}
+		\label{table:conclusionsTable}
+	\end{table}
+
 	The next steps of the development will be to generate the 
 	mentioned representations for the bigger data set, which 
 	will be used to train the binary classification model with 
