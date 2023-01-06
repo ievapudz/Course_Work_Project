@@ -102,9 +102,9 @@
     connection of per residue embeddings would improve the 
     performance of the classification model.
 
-    In addition to these fixed tasks, it was determined to 
-    examine whether other variants of model architectures 
-    would improve the classifier's results.
+    In addition to these fixed tasks, another objective of 
+	this work was to examine whether other variants of model
+	architectures would improve the classifier's results.
 
 	The results of this analysis showed that the best embeddings 
 	representations to use until the final training data set is 
@@ -325,9 +325,15 @@
 	for ProtTrans.
 
 	In order to compare the SLP results with the results of new 
-	architectures, for all models the same hyperparameters 
-	of learning rate and 
-	batch size were set to be 0.0001 and 24 respectively.
+	architectures, for all models 
+	batch size equal to 24, and Adam optimiser \cite{kingma2014adam} 
+	with learning rate of 0.0001 were chosen. Activation function was 
+	chosen to be \href{https://pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html}{sigmoid}
+	(coinciding with the previous work) and loss function - 
+	\href{https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html}{cross entropy loss}
+	adjusted for binary classification case (the main reason for it was to unify loss functions between 
+	binary and multiclass classification, which was put to the test out of this work's scope). 
+	The later change determined  insignificantly different prediction values.
 
 	\begin{table}[h!]
 		\caption{Models that were tested with ESM-1b embeddings input}
@@ -445,36 +451,9 @@
 	embeddings' principal components that explain 95 percent of data variation.
 
 	The analogous scatter plot of the number of absolute correlation 
-	coefficients higher than 0.5 was drawn
-	(Figure \ref{figure:highCorrelationComponentsPC95}). The plot 
-	demonstrated that there are few high correlation coefficients 
-	between components' pairs overall and this observation is supported 
-	by the histogram of correlation coefficients 
-	(Figure \ref{figure:correlationComponentsHistoPC95}). Note that the 
-	number of correlation coefficients for principal components' correlation 
-	analysis was around five times smaller than in the raw embeddings' components
-	analysis (Table \ref{table:vectorsPCADimensions}).
-
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.85]{validation_small_set_2_joined_PC_95_correlation_high_corr.png}
-
-		\caption{Plot of ESM-1b principal components (explaining 
-		95\% of data variation) that have got high correlation coefficients 
-		with ProtTrans principal components (95\%)}
-		\label{figure:highCorrelationComponentsPC95}
-	\end{figure}
-
-	\newpage
-
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.85]{validation_small_set_2_joined_PC_95_correlation_hist.png}
-
-		\caption{Histogram of correlation coefficients between ESM-1b 
-		and ProtTrans principal components (95\%)}
-		\label{figure:correlationComponentsHistoPC95}
-	\end{figure}
+	coefficients higher than 0.5 was drawn for principal components.
+	The analysis implied that there are only few high correlation coefficients 
+	between components' pairs overall.
 
 	\newpage
 
