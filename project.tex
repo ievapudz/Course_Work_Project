@@ -123,6 +123,30 @@
 
 	\section{Materials and methods}
 
+	\subsection{Protein language models}
+
+	Protein language models are transformer models trained on protein sequences.
+	The transformer is a model, which is made of encoder-decoder architecture 
+	that relies entirely on self-attention \cite{vaswani2017attention}. 
+	Attention in deep learning is a mechanism that finds the most influential
+	factors in the data and focuses on them when it processes the input. 
+	Particularly, self-attention is a component of the network's architecture
+	that quantifies dependencies between the input elements.
+
+	The encoder part provides continuous representations of the input composed 
+	of sequences of symbols, meanwhile the decoder part generates output for each 
+	symbol in the input sequence. For this principle of architecture, transformers
+	can be trained in an unsupervised fashion and be applied to natural language
+	processing (NLP) tasks at which they produce state-of-the-art 
+	results \cite{vig2019analyzing}.
+
+	Since amino acid sequences can be considered as a particular language, 
+	transformer architectures were applied to solve tasks related to protein 
+	biology or molecule modelling \textit{in silico}. Attention mechanisms in 
+	models of transformer architecture, taking BERT-like model as an example 
+	\cite{vig2020bertology}, are capable to capture the folding structure, 
+	binding sites, and complex biophysical properties of proteins.
+
 	\subsection{ESM-1b embeddings}
 
 	Due to the novelty of embeddings, a considerably good performance of
