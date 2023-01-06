@@ -98,13 +98,13 @@
     input for the classification model.
 
     Furthermore, it was interesting to exploit not only mean 
-    embeddings, but also to check, whether a different 
+    embeddings, but also to check whether a different 
     connection of per residue embeddings would improve the 
     performance of the classification model.
 
     In addition to these fixed tasks, it was determined to 
     examine whether other variants of model architectures 
-    would elaborate the classifier's results.
+    would improve the classifier's results.
 
 	The results of this analysis showed that the best embeddings 
 	representations to use until the final training data set is 
@@ -113,16 +113,15 @@
 	classification in terms of thermostability is the feed-forward 
 	neural network with two hidden layers.
 
-    The outcomes of this collection of tasks will 
-    contribute in creation of the final definition of the method
-    for binary protein classification into thermostability 
-    classes.
+    The results of this work contribute to the further development of
+	the final method for binary protein classification into 
+	thermostability classes.
 
 	\normalsize
 	
 	\newpage
 
-	\section{Theory}
+	\section{Materials and methods}
 
 	\subsection{ESM-1b embeddings}
 
@@ -183,22 +182,7 @@
 	and UniRef50 data sets separately) 
 	outperformed ESM-1b \cite{rives2021biological} model.
 
-	\newpage
-
-	\section{Methods}
-
-	\subsection{Objective of this work}
-
-	The main objective of this work is to analyse 
-	which numerical representation of proteins is the most 
-	suitable to use as input for the neural network 
-	model that solves our thermostability prediction problem. 
-	Additionally, it was decided to try model 
-	architectures with one or two hidden layers and evaluate, 
-	whether the different architecture improves the 
-	performance.
-
-	\subsection{Data set}
+	\subsection{Training and evaluation data set}
 
 	In this work two types of data sets were used: for the analysis of 
 	principal components' the data set was inherited from the previous 
@@ -620,7 +604,7 @@
 	showed the best results. Since joined representations require
 	generation of ESM-1b embeddings, this type of representation does not 
 	solve the length limitation problem that was noticed in the previous work. 
-	Nevertheless slightly improved results can be observed when normalised 
+	Nevertheless, slightly improved results can be observed when normalised 
 	representations are used, the process of normalisation depends on the data 
 	set, which is not convenient in the process of development until the 
 	final data set is established. Therefore, the optimal choice for 
@@ -633,7 +617,7 @@
 	of the consequent analysis 
 	did not change the conclusion regarding ProtTrans influence for the 
 	results using any variation of analysed representations (listed in the
-	section \ref{analysedRepresentations}) - in all cases model that took 
+	section \ref{analysedRepresentations}) - in all cases the model that took 
 	ProtTrans embeddings as input performed significantly better (Figure 
 	\ref{figure:scoresRepresentationsESMandPT}).
 
