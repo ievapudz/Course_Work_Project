@@ -119,69 +119,6 @@
     classes.
 
 	\normalsize
-
-	\newpage
-
-	\section{Abstract in Lithuanian (Santrauka)}
-
-	\begin{otherlanguage}{lithuanian}
-	
-    Šis darbas yra ankstesnio darbo - binarinę baltymų klasifikaciją 
-    pagal termostabilumą vykdančio modelio vystymo - tęsinys. Vystomas
-    modelis buvo vieno sluoksnio perceptronas, kurio įvestis ESM-1b 
-	\cite{rives2021biological}
-    baltymų kalbos modelio generuojamos skaitinės reprezentacijos, o
-    išvestis - prognozė kiekvienam baltymui, kaip tikėtina, kad jis 
-    priklauso termostabilių baltymų klasei.
-    
-    Termostabilumo klasės buvo atskirtos 65 Celsijaus laipsnių riba:
-    baltymai, kurie yra stabilūs žemesnėje nei nurodyta riba 
-    temperatūroje, priskiriami klasei su žyme '0', o stabilūs 
-    baltymai 65 laipsnių ir aukštesnėje temperatūroje yra 
-    laikomi klasės '1' nariais.
-    
-    Minėtas klasifikatorius buvo apmokytas naudojant duomenų rinkinį, 
-	kuriame
-    saugomos organizmų augimo temperatūros 
-	\cite{engqvist_martin_karl_magnus_2018_1175609}. Į duomenų rinkinį 
-	taip pat
-    buvo įtraukti organizmų proteomų identifikatoriai, kurie buvo
-    panaudoti surinkti proteomui priklausančius baltymus ir juos 
-    sužymėti pagal organizmo augimo temperatūrą.
-
-    Nepaisant to, kad klasifikatorius pateikė neblogus rezultatus,
-    testuojant metodą išryškėjo svarbus trūkumas. Kadangi ESM-1b
-    skaitinių reprezentacijų kūrimas buvo apribotas baltymo ilgiu,
-    nebuvo galima sugeneruoti reprezentacijų baltymams, kurie buvo 
-    ilgesni nei 1022 aminorūgštys. Dėl šios priežasties buvo nutarta
-    išmėginti ProtTrans \cite{elnaggar2020prottrans} skaitines 
-	reprezentacijas kaip klasifikatoriaus
-    įvestį, nes šis baltymų kalbos modelis buvo apmokytas be apribojimo 
-    baltymo ilgiui. 
-
-    Taip pat domino išmėginti ne tik suvidurkintas skaitines 
-    reprezentacijas, bet ir išnaudoti galimybę išgauti kitaip
-    apibendrintas kiekvienos aminorūgšties reprezentacijas bei 
-    patikrinti, ar gauti kitokie įvesties vektoriai suteikia
-    geresnius rezultatus. 
-  
-    Apart reprezentacijų analizės, taip pat buvo atlikti 
-	eksperimentai
-    patikrinimui, ar kitokios modelių architektūros turės
-    ženklios įtakos modelio veikimui.
-
-	Šios analizės rezultatai parodė, kad geriausia naudoti ProtTrans
-	vidurkių bei oktilių skaitines reprezentacijas, kol bus nustatytas 
-	galutinis duomenų rinkinys modelio apmokymui. Taip pat remiantis
-	gautais rezultatais galima teigti, kad geriausia modelio 
-	architektūra baltymų klasifikavimo pagal termostabilumą problemos
-	sprendimui yra neuroninio tinklo modelis su dviem paslėptais
-	sluoksniais.
-      
-    Gautos analizių išvados suteiks naudingų įžvalgų galutinio
-    metodo baltymų klasifikacijai pagal termostabilumą apibrėžimui.
-
-	\end{otherlanguage}
 	
 	\newpage
 
@@ -806,6 +743,69 @@
 	The code that was used to receive the results of this work can be found
 	in the designated Github repository: 
 	\href{https://github.com/ievapudz/Course_Work_Project}{https://github.com/ievapudz/Course\_Work\_Project}.
+
+	\newpage
+
+	\section{Abstract in Lithuanian (Santrauka)}
+
+	\begin{otherlanguage}{lithuanian}
+	
+    Šis darbas yra ankstesnio darbo - binarinę baltymų klasifikaciją 
+    pagal termostabilumą vykdančio modelio vystymo - tęsinys. Vystomas
+    modelis buvo vieno sluoksnio perceptronas, kurio įvestis ESM-1b 
+	\cite{rives2021biological}
+    baltymų kalbos modelio generuojamos skaitinės reprezentacijos, o
+    išvestis - prognozė kiekvienam baltymui, kaip tikėtina, kad jis 
+    priklauso termostabilių baltymų klasei.
+    
+    Termostabilumo klasės buvo atskirtos 65 Celsijaus laipsnių riba:
+    baltymai, kurie yra stabilūs žemesnėje nei nurodyta riba 
+    temperatūroje, priskiriami klasei su žyme '0', o stabilūs 
+    baltymai 65 laipsnių ir aukštesnėje temperatūroje yra 
+    laikomi klasės '1' nariais.
+    
+    Minėtas klasifikatorius buvo apmokytas naudojant duomenų rinkinį, 
+	kuriame
+    saugomos organizmų augimo temperatūros 
+	\cite{engqvist_martin_karl_magnus_2018_1175609}. Į duomenų rinkinį 
+	taip pat
+    buvo įtraukti organizmų proteomų identifikatoriai, kurie buvo
+    panaudoti surinkti proteomui priklausančius baltymus ir juos 
+    sužymėti pagal organizmo augimo temperatūrą.
+
+    Nepaisant to, kad klasifikatorius pateikė neblogus rezultatus,
+    testuojant metodą išryškėjo svarbus trūkumas. Kadangi ESM-1b
+    skaitinių reprezentacijų kūrimas buvo apribotas baltymo ilgiu,
+    nebuvo galima sugeneruoti reprezentacijų baltymams, kurie buvo 
+    ilgesni nei 1022 aminorūgštys. Dėl šios priežasties buvo nutarta
+    išmėginti ProtTrans \cite{elnaggar2020prottrans} skaitines 
+	reprezentacijas kaip klasifikatoriaus
+    įvestį, nes šis baltymų kalbos modelis buvo apmokytas be apribojimo 
+    baltymo ilgiui. 
+
+    Taip pat domino išmėginti ne tik suvidurkintas skaitines 
+    reprezentacijas, bet ir išnaudoti galimybę išgauti kitaip
+    apibendrintas kiekvienos aminorūgšties reprezentacijas bei 
+    patikrinti, ar gauti kitokie įvesties vektoriai suteikia
+    geresnius rezultatus. 
+  
+    Apart reprezentacijų analizės, taip pat buvo atlikti 
+	eksperimentai
+    patikrinimui, ar kitokios modelių architektūros turės
+    ženklios įtakos modelio veikimui.
+
+	Šios analizės rezultatai parodė, kad geriausia naudoti ProtTrans
+	vidurkių bei oktilių skaitines reprezentacijas, kol bus nustatytas 
+	galutinis duomenų rinkinys modelio apmokymui. Taip pat remiantis
+	gautais rezultatais galima teigti, kad geriausia modelio 
+	architektūra baltymų klasifikavimo pagal termostabilumą problemos
+	sprendimui yra neuroninio tinklo modelis su dviem paslėptais
+	sluoksniais.
+      
+    Gautos analizių išvados suteiks naudingų įžvalgų galutinio
+    metodo baltymų klasifikacijai pagal termostabilumą apibrėžimui.
+
+	\end{otherlanguage}
 
 	\newpage
 	
