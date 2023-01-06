@@ -304,8 +304,6 @@
 		\item Octiles (including minimum and maximum) ESM-1b and ProtTrans
 	\end{enumerate}
 
-    \newpage
-
 	\begin{table}[h!]
 		\caption{Sizes of the analysed representations' vectors}
 		\vspace{0.2cm}
@@ -340,7 +338,8 @@
 	had one or two hidden layers. The sizes of hidden layers 
 	were chosen to be original embeddings size divided 
 	by several multiples of 2 (Tables \ref{table:modelArchitecturesESM} 
-	and \ref{table:modelArchitecturesPT}). That is, since the 
+	and \ref{table:modelArchitecturesPT}, 
+	Figures \ref{figure:architecture1HL} and \ref{figure:architecture2HL}). That is, since the 
 	size of the ESM-1b embedding is 1280, there were 
 	models defined with one hidden layer of size 640, 320, or 160 
 	that take ESM-1b embeddings as input. For models with two 
@@ -397,6 +396,32 @@
 		\end{tabular}
 		\label{table:modelArchitecturesPT}
 	\end{table}
+
+	\newpage
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.6]{architecture_0hl.png}
+
+		\caption{A scheme of a single layer perceptron classification model}
+		\label{figure:architecture0HL}
+	\end{figure}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.6]{architecture_1hl.png}
+
+		\caption{A scheme of classification model with one hidden layer}
+		\label{figure:architecture1HL}
+	\end{figure}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.6]{architecture_2hl.png}
+
+		\caption{A scheme of classification model with two hidden layers}
+		\label{figure:architecture2HL}
+	\end{figure}
 
 	\newpage
 
