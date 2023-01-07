@@ -148,6 +148,20 @@
 	\cite{vig2020bertology}, are capable to capture the folding structure, 
 	binding sites, and complex biophysical properties of proteins.
 
+	This work continues to exploit the transfer learning by taking 
+	protein representations from the last layer of protein language 
+	models and passing them as input to the classification 
+	model (Figure \ref{figure:EmbeddingsUsageScheme}).
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.4]{scheme.png}
+
+		\caption{The scheme of embeddings from protein language model usage in the 
+		application neural network model}
+		\label{figure:EmbeddingsUsageScheme}
+	\end{figure}
+
 	\subsection{ESM-1b embeddings}
 
 	Due to the novelty of embeddings, a considerably good performance of
