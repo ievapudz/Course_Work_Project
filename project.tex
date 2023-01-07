@@ -224,9 +224,23 @@
 	\subsection{Training and evaluation data set}
 
 	In this work two types of data sets were used: for the analysis of 
-	principal components' the data set was inherited from the previous 
-	work, although the analysis of other representations was carried 
-	out using the data set that was filtered from identically matching 
+	principal components' the data set was directly inherited from the previous 
+	work: a subset of the data set of 21498 
+	annotated organisms \cite{engqvist_martin_karl_magnus_2018_1175609}, which 
+	is identified as '003' data set, and the filtered version of it.
+	
+	'003' was constructed to be balanced and 
+	that a single taxonomy identifier from the collection of annotated organisms 
+	would be present only in either training, validation, or testing subset. 
+	Proportions that were chosen to divide '003' data set were 70\%, 
+	15\%, and 15\% for training, validation, and testing sets respectively. 
+	Additionally, since this data set 
+	was first created with an intention to test the classifier that used ESM-1b 
+	embeddings as input, all sequences included in '003' are no longer 
+	than 1022 amino acids.
+	
+	Although the analysis of other representations was carried 
+	out using '003' data set that was filtered from identically matching 
 	sequences to get more accurate evaluations.
 
 	\begin{table}[h!]
