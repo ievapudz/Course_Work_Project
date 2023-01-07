@@ -279,36 +279,45 @@
 
 	\newpage
 
-	\subsection{Analysed representations}
-	\label{analysedRepresentations}
+	\subsection{Components' correlation analysis}
 
 	As a consequence of the former work, this thesis includes 
 	analysis of ProtTrans protein language model's mean embeddings 
-	usage in protein classification. 
+	usage in protein classification. Yet also, since one of the 
+	tasks of this work (given in the
+	section \ref{analysedRepresentations}) is to try joined ESM-1b and ProtTrans 
+	representations as an input to the thermostability classification 
+	model, the correlation coefficients between the components of mean 
+	embeddings were analysed.
 
-	Besides the original mean embeddings, principal components 
-	of ESM-1b and ProtTrans
-	mean embeddings were retrieved and taken as input for the 
-	model. In particular, principal components that explained 
-	95 percent and 100 percent of the data variance were picked.
+	For this analysis only a small subset of '003' data set was chosen
+	(Table \ref{table:numberEmbeddingsCorrAnalysis}).
 
 	\begin{table}[h!]
-		\caption{Sizes of the analysed principal components 
-		vectors}
+		\caption{Number of sequences with embeddings used for correlation analysis}
 		\vspace{0.2cm}
 		\centering
-		\begin{tabular}{ | c | c c | }
+		\begin{tabular}{ | c  c | c | }
 			\hline 
-			Explained variance & ESM-1b & ProtTrans \\
+			Class '0' & Class '1' & Overall \\
 			\hline 
-			95\% & 540 & 453 \\
-			100\% & 1280 & 1024 \\
-			\hline    
+			6096 & 6150 & 12246 \\
+			\hline
 		\end{tabular}
-		\label{table:vectorsPCADimensions}
+		\label{table:numberEmbeddingsCorrAnalysis}
 	\end{table}
+
+	Besides the original mean embeddings, principal components that explain 95\% 
+	of variance
+	of ESM-1b and ProtTrans
+	mean embeddings (527 and 443 components for each language model 
+	respectively) were retrieved and taken for the correlation 
+	analysis.
+
+	\subsection{Analysed representations}
+	\label{analysedRepresentations}
 	
-	Furthermore, both protein language models - ESM-1b and 
+	Both protein language models - ESM-1b and 
 	ProtTrans - provide 
 	per token or per residue representations - each 
 	amino acid of the protein gets a 1280 or 1024-dimensional vector from
@@ -478,11 +487,6 @@
 
 	\subsection{Correlation analysis of embeddings' components}
 
-	One of the tasks of this work was to try joined ESM-1b and ProtTrans 
-	representations and pass them as input to the thermostability 
-	classification model. Additionally, the correlation 
-	coefficients between the components of these embeddings were analysed. 
-
 	The results of the analysis showed that there are five ESM-1b
 	embeddings' components that have absolute correlation coefficients 
 	higher than 0.5 with more than 10 ProtTrans embeddings' components  
@@ -513,21 +517,19 @@
 	\newpage
 
 	The plot that visualises absolute maximum correlation coefficients between 
-	pairs of components has two curves (Figure \ref{figure:correlationComponentsMaxAndMean}). 
-	The grey curve provides raw coefficient correlation values - there are peaks 
+	pairs of components has a curve (Figure \ref{figure:correlationComponentsMaxAndMean}). 
+	that shows raw coefficient correlation values - there are peaks 
 	at ESM-1b positions that correspond with positions that have the 
 	biggest number of high (absolute value above 0.5) correlation coefficients
-	(Figure \ref{figure:highCorrelationComponents}). The blue curve shows the trend 
-	of absolute maximum values of correlation coefficients along the ESM-1b components.
-	None of the peaks of the trend curve overstep 0.5. Therefore, it can 
+	(Figure \ref{figure:highCorrelationComponents}). Therefore, it can 
 	be concluded that there are no intervals of ESM-1b components that have 
 	a considerably high correlation with ProtTrans components.
 
 	The observations that can be made from the plot of averaged correlation 
 	coefficients (Figure \ref{figure:correlationComponentsMaxAndMean}) do not change the 
 	overview of the correlation between 
-	ESM-1b and ProtTrans components - the trend of mean correlation coefficients 
-	fluctuates around 0.1.
+	ESM-1b and ProtTrans components - the overall mean of correlation coefficients 
+	is around 0.1.
 
 	\begin{figure}
 		\centering
@@ -553,8 +555,6 @@
 	coefficients higher than 0.5 was drawn for principal components.
 	The analysis implied that there are only few high correlation coefficients 
 	between components' pairs overall.
-
-	\newpage
 
 	The curve of absolute maximum correlation coefficients shows 
 	that there is a trend of correlation coefficients to decrease 
