@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage[margin=1in]{geometry}
 \usepackage{setspace}
+\usepackage{amsfonts}
 
 \usepackage[L7x,T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -317,7 +318,27 @@
 	and ${n}$ is the number of amino acids that compose the protein. 
 	These representations are processed to get vectors with the same 
 	dimension 
-	for each protein in the data set. The representations 
+	for each protein in the data set. 
+	
+	Additionally, it was decided to analyse whether a normalisation of 
+	embeddings determines better results. Both ESM-1b and ProtTrans 
+	embeddings were normalised using the standard score principle for 
+	each element of the embedding (Eq. \ref{normalisationStandardScore}). 
+	The procedure was executed for both 
+	types of protein language models' embeddings separately. The training
+	set's embeddings were used to calculate means and standard deviations 
+	of each component, which resulted in 1024 and 1280 means 
+	and standard deviations for ProtTrans and ESM-1b cases respectively.
+
+	\begin{equation}
+		z_i = \frac{x_i-\mu_i}{\sigma_i},\ where\ i\in\{1, 2, ..., m\}\subset \mathbb{N},\ where\ m\in \{1024, 1280\} 
+		\label{normalisationStandardScore}
+	\end{equation}
+
+	The normalised mean embeddings of protein language models were 
+	used separately and joined together.
+	
+	Eventually, the representations 
 	included in the analysis were:
 
 	\begin{enumerate}
