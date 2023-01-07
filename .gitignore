@@ -6,4 +6,4 @@ project.log
 project.out
 project.synctex.gz
 project.toc
-figures/PP/*
+figures/**
