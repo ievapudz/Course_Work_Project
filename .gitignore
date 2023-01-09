@@ -6,5 +6,6 @@ thesis/project.log
 thesis/project.out
 thesis/project.synctex.gz
 thesis/project.toc
-**/*.pptx
 thesis/figures/old/*.png
+scripts/__pycache__/*
+**/*.pptx
