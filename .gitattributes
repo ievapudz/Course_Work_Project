@@ -1,0 +1,4 @@
+data/003/FASTA/training_v2_ndup_filtEmb.fasta filter=lfs diff=lfs merge=lfs -text
+data/003/FASTA/validation_small_set_2_filtered.fasta filter=lfs diff=lfs merge=lfs -text
+data/003/FASTA/validation_v2_ndup_filtEmb.fasta filter=lfs diff=lfs merge=lfs -text
+data/003/FASTA/testing_v2_ndup_filtEmb.fasta filter=lfs diff=lfs merge=lfs -text
