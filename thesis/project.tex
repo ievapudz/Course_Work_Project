@@ -115,7 +115,7 @@
 	terms of thermostability is the feed-forward 
 	neural network with two hidden layers.
 
-    The results of this work contribute to the further development of
+    These results contribute to the further development of
 	the final method for binary protein classification into 
 	thermostability classes.
 
@@ -186,13 +186,14 @@
 	The script allows to choose 
 	from which model and layer embeddings will be taken, what embeddings 
 	(mean, per amino acid, or beginning of the sequence token) to keep. In the
-	result of using the script, a 1280 dimensional vector for each protein is 
+	result of using the script, a vector of 1280 dimensions for each protein is 
 	generated.
 	
 	The fact that sequences longer than 1024 amino acids were removed from the 
 	validation data set for ESM-1b model's training implies to the limitation of 
 	model's embeddings, which cannot be generated for sequences longer than 
-	1024 amino acids.
+	1022 amino acids (two more amino acids are removed due to beginning and end 
+	tokens needed for the encoding).
 
 	\subsection{ProtTrans embeddings}
 
@@ -215,7 +216,7 @@
 	applied in this work. Additionally, this model 
 	does not have 
 	positional encoding limit, which means that there is no 
-	limitation for the protein's size to generate its embedding. 
+	predetermined limitation for the protein's size to generate its embedding. 
 
 	Furthermore, according to the article, in which ProtTrans
 	project was published, ProtT5-XL models (trained on BFD-100 
@@ -240,7 +241,7 @@
 	embeddings as input, all sequences included in '003' are no longer 
 	than 1022 amino acids.
 	
-	Although the analysis of other representations was carried 
+	However, the analysis of other representations was carried 
 	out using '003' data set that was filtered from identically matching 
 	sequences to get more accurate evaluations.
 
@@ -415,7 +416,8 @@
 	\href{https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html}{cross entropy loss}
 	adjusted for binary classification case (the main reason for it was to unify loss functions between 
 	binary and multiclass classification, which was put to the test out of this work's scope). 
-	The later change determined  insignificantly different prediction values.
+	The later change determined  insignificantly different prediction values compared 
+	to the prediction values from the earlier work.
 
 	\begin{table}[h!]
 		\caption{Models that were tested with ESM-1b embeddings input}
@@ -517,8 +519,8 @@
 	\newpage
 
 	The plot that visualises absolute maximum correlation coefficients between 
-	pairs of components has a curve (Figure \ref{figure:correlationComponentsMaxAndMean}). 
-	that shows raw coefficient correlation values - there are peaks 
+	pairs of components (Figure \ref{figure:correlationComponentsMaxAndMean}) 
+	shows that there are peaks 
 	at ESM-1b positions that correspond with positions that have the 
 	biggest number of high (absolute value above 0.5) correlation coefficients
 	(Figure \ref{figure:highCorrelationComponents}). Therefore, it can 
@@ -562,9 +564,10 @@
 	(Figure \ref{figure:correlationComponentsMaxAndMeanPC95}). The following 
 	plot of mean correlation coefficients 
 	(Figure \ref{figure:correlationComponentsMaxAndMeanPC95}) supports the 
-	statement that high maximum values of absolute correlation 
-	coefficients are not dominating 
-	because the mean correlation is very small between the pairs.
+	statement that high maximum values are not dominating 
+	because the mean of absolute mean correlation coefficients is very 
+	small (close to zero) 
+	between the pairs.
 
 	\begin{figure}
 		\centering
@@ -724,11 +727,10 @@
 	The results of SLP models were compared with the new models 
 	trained with mean embeddings of ESM-1b and ProtTrans (Figure 
 	\ref{figure:scoresMLP_ESMandPT}). Models with 
-	hidden layers reached achieved results than the single-layer 
+	hidden layers achieved better results than the single-layer 
 	models: the best model that used ProtTrans embeddings reached
 	MCC of 0.916, meanwhile the SLP using ProtTrans embeddings 
-	reached MCC of 0.901, although the training duration was 9 times 
-	longer.
+	reached MCC of 0.901.
 
 	\begin{figure}[h!]
 		\centering
@@ -836,7 +838,7 @@
     sužymėti pagal organizmo augimo temperatūrą.
 
     Nepaisant to, kad klasifikatorius pateikė neblogus rezultatus,
-    testuojant metodą išryškėjo svarbus trūkumas. Kadangi ESM-1b
+    testuojant metodą išryškėjo svarbus trūkumas: kadangi ESM-1b
     skaitinių reprezentacijų kūrimas buvo apribotas baltymo ilgiu,
     nebuvo galima sugeneruoti reprezentacijų baltymams, kurie buvo 
     ilgesni nei 1022 aminorūgštys. Dėl šios priežasties buvo nutarta
@@ -848,7 +850,7 @@
     Taip pat domino išmėginti ne tik suvidurkintas skaitines 
     reprezentacijas, bet ir išnaudoti galimybę išgauti kitaip
     apibendrintas kiekvienos aminorūgšties reprezentacijas bei 
-    patikrinti, ar gauti kitokie įvesties vektoriai suteikia
+    patikrinti, ar kitokie įvesties vektoriai suteikia
     geresnius rezultatus. 
   
     Apart reprezentacijų analizės, taip pat buvo atlikti 
@@ -858,8 +860,8 @@
 
 	Šios analizės rezultatai parodė, kad geriausia naudoti ProtTrans
 	vidurkių bei oktilių skaitines reprezentacijas, kol bus nustatytas 
-	galutinis duomenų rinkinys modelio apmokymui. Taip pat remiantis
-	gautais rezultatais galima teigti, kad geriausia modelio 
+	galutinis duomenų rinkinys modelio apmokymui. Taip pat, remiantis
+	gautais rezultatais, galima teigti, kad geriausia modelio 
 	architektūra baltymų klasifikavimo pagal termostabilumą problemos
 	sprendimui yra neuroninio tinklo modelis su dviem paslėptais
 	sluoksniais.
