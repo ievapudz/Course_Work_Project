@@ -419,6 +419,12 @@
 	The later change determined  insignificantly different prediction values compared 
 	to the prediction values from the earlier work.
 
+	As previously, the output of all models is a number from the interval 
+	between 0 and 1 (both included). The binary class label is assigned 
+	using the threshold of 0.5: if the prediction is greater than or 
+	equal to 0.5, the protein is considered as thermostable (gets a label '1'),
+	otherwise the protein's label is assigned to be '0'.
+
 	\begin{table}[h!]
 		\caption{Models that were tested with ESM-1b embeddings input}
 		\vspace{0.2cm}
