@@ -8,11 +8,11 @@ import time
 import os
 
 def get_pretrained_model(model_path):
-    '''
+    """
     Fetches the model accordingly to the model_path
     model_path - STRING that identifies the model to fetch
     Returns model.
-    '''
+    """
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     if(os.path.exists(model_path+'/pytorch_model.bin') and
@@ -27,21 +27,21 @@ def get_pretrained_model(model_path):
     return model
 
 def save_pretrained_model(model, path_to_dir):
-    '''
+    """
     Saves the model to the file (PT).
     model - OBJ [PreTrainedModel] of the model to save
     path_to_dir - STRING that identifies the destination to save the model
-    '''
+    """
 
     model.save_pretrained(path_to_dir)
 
 def get_tokenizer(model_path):
-    '''
+    """
     Fetches the tokenizer accordingly to the model_path
     model_path - STRING that identifies the model whose tokenizer 
                  should be fetched
     Returns tokenizer.
-    '''
+    """
     if(os.path.exists(model_path+'/pytorch_model.bin') and
         os.path.exists(model_path+'/config.json')):
         tokenizer = T5Tokenizer.from_pretrained(model_path+'/pytorch_model.bin',
@@ -52,13 +52,13 @@ def get_tokenizer(model_path):
     return tokenizer
 
 def process_FASTA(fasta_path, split_char="!", id_field=0):
-    '''
+    """
     Reads in fasta file containing multiple sequences.
     Split_char and id_field allow to control identifier extraction from header.
     E.g.: set split_char="|" and id_field=1 for SwissProt/UniProt Headers.
     Returns dictionary holding multiple sequences or only single 
     sequence, depending on input file.
-    '''
+    """
 
     seqs = dict()
     with open( fasta_path, 'r' ) as fasta_f:
@@ -85,7 +85,7 @@ def process_FASTA(fasta_path, split_char="!", id_field=0):
 def get_embeddings(model, tokenizer, seqs, per_residue, per_protein, per_protein_std=False,
     per_protein_q=False, per_protein_hist=False, max_residues=4000, max_seq_len=1000, max_batch=100):
 
-    '''
+    """
     Generation of embeddings via batch-processing.
     per_residue indicates that embeddings for each residue in a protein 
                 should be returned.
@@ -101,7 +101,7 @@ def get_embeddings(model, tokenizer, seqs, per_residue, per_protein, per_protein
     max_batch gives the upper number of sequences per batch
     
     Returns results depending on the option in the input.
-    '''
+    """
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
@@ -121,16 +121,6 @@ def get_embeddings(model, tokenizer, seqs, per_residue, per_protein, per_protein
         seq = ' '.join(list(seq))
         batch.append((pdb_id, seq, seq_len))
 
-        n_res_batch = sum([s_len for _, _, s_len in batch]) + seq_len
-        """
-        if len(batch) >= max_batch or n_res_batch >= max_residues or seq_idx == len(seq_dict) or seq_len > max_seq_len:
-            pdb_ids, seqs, seq_lens = zip(*batch)
-            batch = list()
-
-            token_encoding = tokenizer.batch_encode_plus(seqs, add_special_tokens=True, padding='longest')
-            input_ids = torch.tensor(token_encoding['input_ids']).to(device)
-            attention_mask = torch.tensor(token_encoding['attention_mask']).to(device)
-        """
         pdb_ids, seqs, seq_lens = zip(*batch)
         batch = list()
 
@@ -184,10 +174,10 @@ def get_embeddings(model, tokenizer, seqs, per_residue, per_protein, per_protein
     return results
 
 class FNN(nn.Module):
-    '''
+    """
     Class that defines the model for subcellular localisation and 
     classification to membrane / soluble proteins classification
-    '''
+    """
     def __init__(self):
         super(FNN, self).__init__()
         # Linear layer, taking embedding dimension 1024 to make predictions:

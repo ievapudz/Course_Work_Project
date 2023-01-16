@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.7
 
 # A script that collects ESM-1b embeddings to an
-# NPZ file.
+# NPZ file
 
 import sys
 import torch

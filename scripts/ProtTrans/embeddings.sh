@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # It is a submission script to run embeddings'
-# generation program.
+# generation program
 
 set -ue
 

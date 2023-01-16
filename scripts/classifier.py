@@ -1,5 +1,7 @@
 #!/usr/bin/env python3.7
 
+# Training, validation, and testing of the model
+
 import sys
 import os
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3.7
 
+# Script to convert TSV file to NPZ
+
 from optparse import OptionParser
 import numpy
 

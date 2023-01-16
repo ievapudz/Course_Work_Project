@@ -9,9 +9,21 @@ import matplotlib as mpl
 from cycler import cycler
 import numpy
 
-# Running training epoch for multiclass classification
 def train_epoch_multiclass(model, train_loader, loss_function, optimizer, 
 	batch_size, epoch, num_of_classes, pred_file_handle=None):
+	"""
+	Running training epoch for multiclass classification (can be 
+	used for binary classification as well).
+	model - PYTORCH MODEL to train
+	train_loader - PYTORCH DATALOADER to load the training data
+	loss_function - PYTORCH NN module's function for loss evaluation
+	optimizer - PYTORCH OPTIM module's optimizer 
+	batch_size - INT to determine the size of the mini-batch
+	epoch - INT to determine which epoch is currently running
+	num_of_classes - INT to determine the number of classes in the 
+		classification problem
+	pred_file_handle - FILE object opened to write training stage predictions
+	"""
 
 	epoch_targets = []
 	epoch_outputs = []
@@ -73,10 +85,28 @@ def train_epoch_multiclass(model, train_loader, loss_function, optimizer,
 			pred_file_handle=pred_file_handle, num_of_classes=num_of_classes, 
 			flag='T')
 
-# Running training epoch for multiclass classification
 def validation_epoch_multiclass(model, validate_loader, loss_function, batch_size,
 	epoch, num_of_epochs, ROC_curve_plot_file_prefix, pred_file_handle, 
-	num_of_classes=16, validation_flag='V', no_print_probs=False):
+	num_of_classes=2, validation_flag='V', no_print_probs=False):
+	"""
+	Running validation epoch for multiclass classification (can be 
+	used for binary classification as well).
+	model - PYTORCH MODEL to validate
+	validate_loader - PYTORCH DATALOADER to load the validation data
+	loss_function - PYTORCH NN module's function for loss evaluation
+	batch_size - INT to determine the size of the mini-batch
+	epoch - INT to determine which epoch is currently running
+	num_of_epochs - INT to determine how many epochs will be run
+	ROC_curve_plot_file_prefix - STRING that determines the prefix 
+		of the ROC curve plot files
+	pred_file_handle - FILE object opened to write validation stage predictions
+	num_of_classes - INT to determine the number of classes in the 
+		classification problem
+	validation_flag - STRING to mark the prediction output as validation (i.e. 'V') or
+		testing (i.e. 'TE')
+	no_print_probs - BOOLEAN flag to set if printing mpredicted class 
+		probabilities is not required
+	"""
 
 	epoch_targets = []
 	epoch_outputs = []
@@ -161,15 +191,15 @@ def print_epoch_metrics(epoch_outputs, epoch_probabilities, epoch_targets,
 	num_of_classes, flag, epoch_pos_probs=None):
 	"""
 	Printing metrics for an epoch.
-	- epoch_outputs 		- array-like object with output class labels
-	- epoch_probabilities 	- array-like object with class probabilities
-	- epoch_targets			- array-like object with true class labels
-	- epoch 				- [INT] that denotes epoch
-	- num_of_epochs			- [INT] that denotes overall epoch number
-	- ROC_curve_plot_file_prefix - [STRING] marking the prefix for ROC files
-	- pred_file_handle		- handle of the opened file for writing predictions
-	- num_of_classes		- [INT] that denotes the number of classes
-	- flag					- [STRING] that denotes the stage
+	epoch_outputs - array-like object with output class labels
+	epoch_probabilities - array-like object with class probabilities
+	epoch_targets - array-like object with true class labels
+	epoch - INT that denotes epoch
+	num_of_epochs - INT that denotes overall epoch number
+	ROC_curve_plot_file_prefix - STRING marking the prefix for ROC files
+	pred_file_handle - handle of the opened file for writing predictions
+	num_of_classes - INT that denotes the number of classes
+	flag - STRING that denotes the stage
 	"""
 
 	MCC_epoch = metrics.matthews_corrcoef(epoch_targets, epoch_outputs)
@@ -211,7 +241,15 @@ def print_epoch_metrics(epoch_outputs, epoch_probabilities, epoch_targets,
 		print('# '+str(conf_m[i]), file=pred_file_handle)
 
 def plot_ROC_curve(targets, num_of_epochs, outputs, fig_name, clear_plot=False):
-	# A function that plots ROC curve
+	"""
+	Plotting the ROC curve.
+	targets - array-like object to store the true values
+	num_of_epochs - INT noting how many epochs were executed
+	outputs - array-like object to store the prediction values (raw)
+	fig_name - STRING to set the name for the plot
+	clear_plot - BOOLEAN that determines whether to clear the plot 
+		before plotting or not
+	"""
 	if clear_plot:
 		plt.clf()
 	fpr, tpr, _ = metrics.roc_curve(targets, outputs)
@@ -225,6 +263,17 @@ def plot_ROC_curve(targets, num_of_epochs, outputs, fig_name, clear_plot=False):
 # A function that makes inferences about unlabelled data
 def inference_epoch(model, test_loader, threshold, file_for_predictions='', 
 	labelled=False, binary_predictions_only=True, identifiers=[]):
+	"""
+	Making inferences about the unlabelled data.
+	model - PYTORCH MODEL to test
+	test_loader - PYTORCH DATALOADER to load the inference data
+	threshold - INT for temperature threshold setting
+	file_for_predictions - STRING to the path of the file with inferences
+	labelled - BOOLEAN to set if the data set was actually labelled
+	binary_predictions_only - BOOLEAN to set if only binary prediction labels 
+		are needed to print
+	identifiers - LIST of identifiers in the inference data set
+	"""
 	
 	epoch_outputs = []
 
@@ -269,29 +318,4 @@ def inference_epoch(model, test_loader, threshold, file_for_predictions='',
 
 	file_handle.close()
 
-# Calculation of prediction's accuracy per organism 
-def calculate_accuracy_per_tax_id(predictions_dict, out_filename=''):
-	
-	if(out_filename != ''):
-		file_handle = open(out_filename, 'w')
-		file_handle.write("TaxID\ttrue_temperature\tperc_0\tperc_1\n")
-	else:
-		print("TaxID\ttrue_temperature\tperc_0\tperc_1")
-
-	for taxid in predictions_dict.keys():
-		all_predictions = predictions_dict[taxid]['0'] + \
-						  predictions_dict[taxid]['1']
-		predicted_0_percentage = predictions_dict[taxid]['0'] / \
-								 all_predictions * 100
-		predicted_1_percentage = predictions_dict[taxid]['1'] / \
-								 all_predictions * 100
-		if(out_filename != ''):
-			file_handle.write('{}\t{}\t{}\t{}\n'.format(taxid, predictions_dict[taxid]['true_temperature'],
-							  predicted_0_percentage, predicted_1_percentage))
-		else:
-			print('{}\t{}\t{}\t{}'.format(taxid, predictions_dict[taxid]['true_temperature'], 
-							  predicted_0_percentage, predicted_1_percentage))
-
-	if(out_filename != ''):
-		file_handle.close()
 
