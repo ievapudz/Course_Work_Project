@@ -51,13 +51,14 @@ sbatch --export=ALL,DATA_DIR='data/003/',JOB_NAME='testing_v2_ndup_filtEmb' --ar
 
 ```
 
-Saving embeddings:
+Saving embeddings (this and following commands were analogous to 
+other data subsets):
 
 ```
-./scripts/ESM-1b/save_embeddings.py \
+time srun ./scripts/ESM-1b/save_embeddings.py \
     -f data/003/FASTA/data/003/FASTA/training_v2_ndup_filtEmb.fasta \
     --pt-dir data/003/ESM-1b/ --representations 'mean' \
-    --keyword 'validate' -t data/003/TSV/training_v2_ESM_ndup_filtEmb.tsv 
+    --keyword 'train' -t data/003/TSV/training_v2_ESM_ndup_filtEmb.tsv 
 
 time srun ./scripts/ProtTrans/save_embeddings.py \
     --fasta data/003/FASTA/training_v2_ndup_filtEmb.fasta --pt-dir data/003/ProtTans \
@@ -65,7 +66,7 @@ time srun ./scripts/ProtTrans/save_embeddings.py \
     --tsv data/003/TSV/training_v2_PT_ndup_filtEmb.tsv
 ```
 
-converting TSV to NPZ:
+Converting TSV to NPZ:
 
 ```
 ./scripts/TSV_to_NPZ.py \
@@ -94,7 +95,28 @@ To get per-residue representations percentiles (for this example, octiles):
 ./scripts/pick_percentiles.py -f data/003/FASTA/training_v2_ndup_filtEmb.fasta
 	--pt-dir data/003/ESM-1b/ --keyword 'train' \
 	--percentiles '0 0.125 0.25 0.375 0.5 0.625 0.75 0.875 1' \
-	-t  data/003/TSV/training_v2_ESM_ndup_filtEmb_octiles.tsv
+	-t data/003/TSV/training_v2_ESM_ndup_filtEmb_octiles.tsv
+```
+
+## Extracting principal components
+
+```
+time srun ./scripts/get_PC.py \
+    --FASTA data/003/FASTA/validation_small_set_2.fasta \
+    --emb-dir data/003/ESM-1b/validation_v2/ --key 'validate' \
+    -n data/003/NPZ/validation_small_set_2_ESM_PC_95.npz --number 527
+
+time srun ./scripts/get_PC.py \
+    --FASTA data/003/FASTA/validation_small_set_2.fasta \
+    --emb-dir data/003/ProtTrans/validation_v2/ --key 'validate' \
+    -n data/003/NPZ/validation_small_set_2_PT_PC_95.npz --number 443
+
+time srun ./scripts/join_embeddings.py \
+    --npz-1 data/003/NPZ/validation_small_set_2_ESM_PC_95_filtered.npz \
+    --npz-2 data/003/NPZ/validation_small_set_2_PT_PC_95_filtered.npz \
+    -k 'validate' \
+    --npz-out data/003/NPZ/validation_small_set_2_joined_PC_95.npz \
+    --tsv-out data/003/TSV/validation_small_set_2_joined_PC_95.tsv
 ```
 
 ## Correlation analysis
@@ -104,7 +126,7 @@ of split validation set (003). Sequences were filtered to keep only those that
 have embeddings generated.
 
 ```
-./scripts/ESM-1b/save_embeddings.py \
+time srun ./scripts/ESM-1b/save_embeddings.py \
     -f data/003/FASTA/validation_small_set_2_filtered.fasta \
     --pt-dir data/003/ESM-1b/ --representations 'mean' \
     --keyword 'validate' -t data/003/TSV/validation_small_set_2_filtered.tsv \
@@ -123,7 +145,7 @@ time srun ./scripts/ProtTrans/save_embeddings.py \
     -t data/003/TSV/validation_small_set_2_PT_filtered.tsv \
     -k 'validate' -n data/003/NPZ/validation_small_set_2_PT_filtered.npz
 
-time srun ./scripts/ProtTrans/join_embeddings.py \
+time srun ./scripts/join_embeddings.py \
     --npz-1 data/003/NPZ/validation_small_set_2_ESM_filtered.npz \
     --npz-2 data/003/NPZ/validation_small_set_2_PT_filtered.npz \
     -k 'validate' \
@@ -135,14 +157,14 @@ Matrices with correlation coefficients were created by executing
 the following commands:
 
 ```
-./scripts/correlation.py --npz validation_small_set_2_joined.npz \
+time srun ./scripts/correlation.py --npz validation_small_set_2_joined.npz \
 	-k 'validate' -b 1280 \
 	--matrix-out data/validation_small_set_2_joined_matrix.txt
 ```
 
 ```
-./scripts/correlation.py --npz validation_small_set_2_joined.npz \
-    -k 'validate' -b 1280 \
+time srun ./scripts/correlation.py --npz validation_small_set_2_joined_PC_95.npz \
+    -k 'validate' -b 527 \
     --matrix-out data/validation_small_set_2_joined_PC_95_matrix.txt
 ```
 

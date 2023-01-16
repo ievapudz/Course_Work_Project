@@ -26,10 +26,6 @@ parser.add_option('--tsv-out', dest='tsv_out',
 
 (options, args) = parser.parse_args()
 
-# TODO: error handling if either of NPZ files is not defined
-
-# TODO: error handling if key is not defined
-
 data_1 = load_NPZ_file(options.npz_1, ['x_'+options.key, 'y_'+options.key], 
 	['z_'+options.key])
 
